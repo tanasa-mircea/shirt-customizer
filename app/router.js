@@ -7,6 +7,9 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
+  this.route('customizer', {
+    path: '/customizer'
+  })
 });
 
 export default Router;

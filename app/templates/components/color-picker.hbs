@@ -1,3 +1,9 @@
 <div class="color-picker__matrix">
-
+  {{#each colorPoints as |row|}}
+    <div class="color-picker__row">
+      {{#each row as |point|}}
+        {{color-point color=point clickAction=(action "pointClicked")}}
+      {{/each}}
+    </div>
+  {{/each}}
 </div>
