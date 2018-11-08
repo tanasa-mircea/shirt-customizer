@@ -1,4 +1,5 @@
 import Component from '@ember/component';
+import { htmlSafe } from '@ember/template';
 
 export default Component.extend({
   attributeBindings: ['style'],
@@ -9,6 +10,7 @@ export default Component.extend({
     this.class = "items-gallery";
 
     if (this.rows && this.rows > 1)
-      this.style += "flex-wrap: wrap;";
+      var style = this.get('style');
+      this.set('style', new htmlSafe(style + 'flex-wrap: wrap;'));
   }
 });
