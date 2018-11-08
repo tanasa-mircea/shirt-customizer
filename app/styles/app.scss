@@ -6,6 +6,7 @@
 
 .drawing-board {
   border: 1px solid black;
+  display: flex;
   padding: 30px;
   width: 50vw;
   height: 30vw;
@@ -18,7 +19,7 @@
 
 .shirt-svg {
   height: 100%;
-  width: 100%;
+  width: 33%;
 }
 
 .color-picker {
@@ -34,4 +35,14 @@
 .color-point {
   height: 5px;
   width: 5px;
+}
+
+.items-gallery {
+  display: flex;
+
+  &__item {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
 }
