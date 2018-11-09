@@ -8,6 +8,7 @@ export default Component.extend({
   willRender() {
     this.style = "";
     this.class = "items-gallery";
+    this.galleryItemStyle = new htmlSafe('width: ' + (100 / (this.itemsOnSlide / this.rows)) + '%;');
 
     if (this.rows && this.rows > 1)
       var style = this.get('style');

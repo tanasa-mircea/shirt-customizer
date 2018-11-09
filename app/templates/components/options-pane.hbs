@@ -6,9 +6,9 @@
 
   <div class="options-pane__option">
     <h2>Icons</h2>
-    {{#items-gallery iconAdded=(action "iconAdded") rows='2' itemsOnSlide='8'}}
+    {{#items-gallery iconAdded=(action "iconAdded") rows="2" itemsOnSlide="8" as |galleryItemStyle|}}
       {{#each icons as |icon|}}
-        <div class="items-gallery__item" style='width: 25%'>
+        <div class="items-gallery__item" style={{ galleryItemStyle }}>
           {{ sticky-icon icon=(get iconsSvgs icon) }}
         </div>
       {{/each}}

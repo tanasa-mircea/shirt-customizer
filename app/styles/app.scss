@@ -20,6 +20,22 @@
 .shirt-svg {
   height: 100%;
   width: 33%;
+
+  .main-path {
+    stroke: black;
+    stroke-width: 2px;
+  }
+
+  .secondary-path {
+    stroke: black;
+    stroke-width: 1px;
+  }
+
+  .third-path {
+    stroke: black;
+    stroke-width: 1px;
+    fill: none;
+  }
 }
 
 .color-picker {
