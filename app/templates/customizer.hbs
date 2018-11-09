@@ -1,6 +1,6 @@
 <h1>Shirt Customizer</h1>
 
 <div class="main-wrapper">
-  {{ drawing-board color=currentColor shirtSvgs=model.[1] }}
-  {{ options-pane colorChanged=(action "colorChanged") iconsSvgs=model.[0] options=model.[2].options }}
+  {{ drawing-board color=currentColor shirtSvgs=model.[0] }}
+  {{ options-pane colorChanged=(action "colorChanged") options=model.[1].options }}
 </div>
