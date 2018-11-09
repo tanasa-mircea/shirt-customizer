@@ -1,3 +1,4 @@
 {
-  "disableAnalytics": true
+  "disableAnalytics": true,
+  "usePods": true
 }

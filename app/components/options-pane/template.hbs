@@ -5,6 +5,11 @@
   </div>
 
   <div class="options-pane__option">
+    <h2>Color Canvas</h2>
+    {{color-picker-canvas colorChanged=(action "colorChanged")}}
+  </div>
+
+  <div class="options-pane__option">
     <h2>Icons</h2>
     {{#items-gallery iconAdded=(action "iconAdded") rows="2" itemsOnSlide="8" as |galleryItemStyle|}}
       {{#each icons as |icon|}}
