@@ -1,1 +1,5 @@
-{{yield galleryItemStyle}}
+{{#each (get options 'icons') as |icon|}}
+  <div class="items-gallery__item" style={{ galleryItemStyle }}>
+    {{ sticky-icon icon=icon }}
+  </div>
+{{/each}}

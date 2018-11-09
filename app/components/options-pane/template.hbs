@@ -1,22 +1,8 @@
 <div class="options-pane">
-  <div class="options-pane__option">
-    <h2>Color</h2>
-    {{color-picker colorChanged=(action "colorChanged")}}
-  </div>
-
-  <div class="options-pane__option">
-    <h2>Color Canvas</h2>
-    {{color-picker-canvas colorChanged=(action "colorChanged")}}
-  </div>
-
-  <div class="options-pane__option">
-    <h2>Icons</h2>
-    {{#items-gallery iconAdded=(action "iconAdded") rows="2" itemsOnSlide="8" as |galleryItemStyle|}}
-      {{#each icons as |icon|}}
-        <div class="items-gallery__item" style={{ galleryItemStyle }}>
-          {{ sticky-icon icon=(get iconsSvgs icon) }}
-        </div>
-      {{/each}}
-    {{/items-gallery}}
-  </div>
+  {{#each options as |option|}}
+    <div class="options-pane__option">
+      <h2>{{ option.name }}</h2>
+      {{ component option.component change=(action "colorChanged") options=option.config }}
+    </div>
+  {{/each}}
 </div>

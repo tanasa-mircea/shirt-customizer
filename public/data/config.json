@@ -1,0 +1,16 @@
+{
+  "options": [
+    {
+      "name": "Color",
+      "component": "color-picker-canvas"
+    }, {
+      "name": "Icons",
+      "component": "items-gallery",
+      "config": {
+        "icons": ["alien", "ufo", "asteroid", "blackHole", "chewbaka", "earth", "iss", "rick"],
+        "rows": 2,
+        "itemsToDisplay": 8
+      }
+    }
+  ]
+}

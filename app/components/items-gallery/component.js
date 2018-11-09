@@ -8,9 +8,10 @@ export default Component.extend({
   willRender() {
     this.style = "";
     this.class = "items-gallery";
-    this.galleryItemStyle = new htmlSafe('width: ' + (100 / (this.itemsOnSlide / this.rows)) + '%;');
+    this.galleryItemStyle = new htmlSafe('width: ' + (100 / (this.options.itemsToDisplay / this.options.rows)) + '%;');
+    console.log('this.options ', this.options)
 
-    if (this.rows && this.rows > 1)
+    if (this.options.rows && this.options.rows > 1)
       var style = this.get('style');
       this.set('style', new htmlSafe(style + 'flex-wrap: wrap;'));
   }
