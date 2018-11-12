@@ -56,10 +56,42 @@
 
 .items-gallery {
   display: flex;
+  flex-wrap: wrap;
+  padding: 0 15px;
+  position: relative;
 
   &__item {
     align-items: center;
     display: flex;
     justify-content: center;
+
+    svg {
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  &__nav {
+    display: flex;
+    justify-content: space-between;
+    left: 0;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+  }
+
+  &__left {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-right: 10px solid black;
+    cursor: pointer;
+  }
+
+  &__right {
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    border-left:10px solid black;
+    cursor: pointer;
   }
 }

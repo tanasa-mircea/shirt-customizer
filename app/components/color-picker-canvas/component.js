@@ -9,8 +9,7 @@ export default Component.extend({
   attributeBindings: ['height', 'style', 'width'],
 
   willRender: function() {
-    // this.set('style', new htmlSafe('width: 100%'));
-
+    this.set('style', new htmlSafe('width: 100%'));
   },
 
   didRender() {

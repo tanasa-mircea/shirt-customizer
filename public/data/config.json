@@ -7,9 +7,8 @@
       "name": "Icons",
       "component": "items-gallery",
       "config": {
-        "icons": ["alien", "ufo", "asteroid", "blackhole", "chewbaka", "earth", "iss", "rick"],
-        "rows": 2,
-        "itemsToDisplay": 8
+        "icons": ["alien", "ufo", "asteroid", "blackhole", "chewbaka", "earth", "iss", "rick", "atom", "astronaut", "bb8", "bigDipper", "brainSlug", "cassiopeia", "commet", "cyclonRaider", "darthVader", "deathStar", "galaxy", "jupiter", "laserGun", "mars", "falcon", "fullMoon", "morty", "leia", "rocket", "sputnick", "stormtrooper", "telescope", "venus"],
+        "itemsToDisplay": 20
       }
     }
   ]

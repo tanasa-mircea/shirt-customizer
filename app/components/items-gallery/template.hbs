@@ -1,5 +1,12 @@
-{{#each (get options 'icons') as |icon|}}
-  <div class="items-gallery__item" style={{ galleryItemStyle }}>
-    {{ sticky-icon icon=icon }}
-  </div>
+{{#each (get options 'icons') as |icon index|}}
+  {{#if (gallerycond index page (get options 'itemsToDisplay')) }}
+    <div class="items-gallery__item" style={{ galleryItemStyle }}>
+      {{ sticky-icon icon=icon }}
+    </div>
+  {{/if}}
 {{/each}}
+
+<div class="items-gallery__nav">
+  <div class="items-gallery__left" {{ action "leftClickHandler" on="click" }}></div>
+  <div class="items-gallery__right" {{ action "rightClickHandler" on="click" }}></div>
+</div>
