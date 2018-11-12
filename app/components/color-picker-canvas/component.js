@@ -3,13 +3,12 @@ import { htmlSafe } from '@ember/template';
 
 export default Component.extend({
   tagName: 'canvas',
-  width: 400,
-  height: 100,
+  width: 255,
+  height: 500,
   style: '',
-  attributeBindings: ['height', 'style', 'width'],
+  attributeBindings: ['height', 'width'],
 
   willRender: function() {
-    this.set('style', new htmlSafe('width: 100%'));
   },
 
   didRender() {
@@ -20,7 +19,8 @@ export default Component.extend({
         saturation = 100,
         row = 0,
         column,
-        step = 1,
+        hueStep = 360 / this.width,
+        saturationStep = 100 / this.height,
         pointSize = 1;
         // pointSize = this.canvas.offsetWidth / 360;
 
@@ -31,12 +31,12 @@ export default Component.extend({
       while (hue < 360) {
         this.context.fillStyle=`hsl(${hue}, ${saturation}%, 50%)`;
         this.context.fillRect(column * pointSize, row * pointSize, pointSize, pointSize);
-        hue = hue + step;
+        hue = hue + hueStep;
         column++;
       }
 
       row++;
-      saturation = saturation - step;
+      saturation = saturation - saturationStep;
     }
   },
 
