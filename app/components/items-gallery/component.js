@@ -12,8 +12,8 @@ export default Component.extend({
   }),
 
   willRender() {
-    this.class = "items-gallery";
-    this.galleryItemStyle = new htmlSafe('width: ' + 10 + '%;');
+    this.set("class", "items-gallery");
+    this.set("galleryItemStyle", new htmlSafe('width: ' + 10 + '%;'));
   },
 
   actions: {

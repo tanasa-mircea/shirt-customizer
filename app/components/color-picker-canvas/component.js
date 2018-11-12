@@ -49,7 +49,7 @@ export default Component.extend({
     // debugger
     let color = this.context.getImageData(event.offsetX, event.offsetY, 1, 1).data;
 
-    this.colorChanged(this.toRgb(color));
+    this.change(this.toRgb(color));
 
   }
 });

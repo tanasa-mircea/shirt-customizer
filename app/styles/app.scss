@@ -95,3 +95,21 @@
     cursor: pointer;
   }
 }
+
+.tooltip {
+  border: 1px solid black;
+  background-color: white;
+  display: none;
+  position: absolute;
+  padding: 20px;
+  width: 100px;
+  height: 100px;
+
+  svg {
+    width: 100%;
+  }
+
+  &.visible {
+    display: block;
+  }
+}

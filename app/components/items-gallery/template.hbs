@@ -1,10 +1,15 @@
 {{#each (get options 'icons') as |icon index|}}
   {{#if (gallerycond index page (get options 'itemsToDisplay')) }}
     <div class="items-gallery__item" style={{ galleryItemStyle }}>
-      {{ sticky-icon icon=icon }}
+      {{#sticky-icon icon=icon as |iconData|}}
+        {{#tool-tip visible=iconData.showTooltip}}
+          {{ iconData.icon }}
+        {{/tool-tip}}
+      {{/sticky-icon}}
     </div>
   {{/if}}
 {{/each}}
+
 
 <div class="items-gallery__nav">
   <div class="items-gallery__left" {{ action "leftClickHandler" on="click" }}></div>
