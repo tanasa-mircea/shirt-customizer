@@ -5,7 +5,7 @@ export function gallerycond(params) {
   currentPage = params[1],
   displayNumber = params[2];
 
-  return currentIndex > ((currentPage - 1) * displayNumber) && currentIndex <= (currentPage * displayNumber);
+  return currentIndex >= ((currentPage - 1) * displayNumber) && currentIndex < (currentPage * displayNumber);
 }
 
 export default helper(gallerycond);
