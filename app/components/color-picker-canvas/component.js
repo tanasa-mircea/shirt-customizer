@@ -1,10 +1,9 @@
 import Component from '@ember/component';
-import { htmlSafe } from '@ember/template';
 
 export default Component.extend({
   tagName: 'canvas',
   width: 255,
-  height: 500,
+  height: 100,
   style: '',
   attributeBindings: ['height', 'width'],
 
@@ -20,9 +19,7 @@ export default Component.extend({
         row = 0,
         column,
         hueStep = 360 / this.width,
-        saturationStep = 100 / this.height,
-        pointSize = 1;
-        // pointSize = this.canvas.offsetWidth / 360;
+        saturationStep = 100 / this.height;
 
     while (saturation > 0) {
       column = 0,
@@ -30,7 +27,7 @@ export default Component.extend({
 
       while (hue < 360) {
         this.context.fillStyle=`hsl(${hue}, ${saturation}%, 50%)`;
-        this.context.fillRect(column * pointSize, row * pointSize, pointSize, pointSize);
+        this.context.fillRect(column, row, 1, 1);
         hue = hue + hueStep;
         column++;
       }
