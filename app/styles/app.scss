@@ -128,4 +128,8 @@
 
 .board-icon {
   position: absolute;
+
+  &.selected {
+    border: 1px solid blue;
+  }
 }
