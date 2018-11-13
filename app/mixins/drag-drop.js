@@ -15,16 +15,28 @@ export default Mixin.create({
 
   mouseDown(event) {
     this.isMouseDown = true;
+
+    this.mouseMoveRef = this.mouseMoveHandler.bind(this);
+    this.mouseUpRef = this.mouseUpHandler.bind(this);
+
+    window.addEventListener('mousemove', this.mouseMoveRef);
+    window.addEventListener('mouseup', this.mouseUpRef);
+
     this.mouseDownOverride(event);
   },
-  mouseMove(event) {
+
+  mouseMoveHandler: function(event) {
     if (this.isMouseDown) {
       this.mouseMoveOverride(event);
     }
   },
-  mouseUp(event) {
+
+  mouseUpHandler: function(event) {
     if (this.isMouseDown) {
       this.isMouseDown = false;
+      window.removeEventListener('mousemove', this.mouseMoveRef);
+      window.removeEventListener('mouseup', this.mouseUpRef);
+
       this.mouseUpOverride(event);
     }
   }

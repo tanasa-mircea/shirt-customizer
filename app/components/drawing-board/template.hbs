@@ -10,4 +10,8 @@
   <svg fill={{ color }} class="shirt-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195.27 192.8">
     {{ sanitize (get shirtSvgs "side") }}
   </svg>
+
+  {{#each icons as |iconData|}}
+    {{ board-icon icon=iconData.icon position=iconData.position parentOffsets=parentOffsets}}
+  {{/each}}
 </div>
