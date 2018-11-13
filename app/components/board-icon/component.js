@@ -45,9 +45,6 @@ export default Component.extend(DragNDropMixin, {
   },
 
   changeColor: function(color) {
-    console.log('change color ', color)
     this.set('color', color);
   }
-
-
 });

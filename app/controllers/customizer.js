@@ -13,7 +13,6 @@ export default Controller.extend({
     },
 
     iconAdded(icon) {
-      console.log('icon added ', icon);
     }
   }
 });

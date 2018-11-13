@@ -34,7 +34,6 @@ export default Component.extend({
 
   actions: {
     iconSelected: function(icon) {
-      console.log('icon selected ', icon)
       this.selectedItem = icon;
     }
   }
