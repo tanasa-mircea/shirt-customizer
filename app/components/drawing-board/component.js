@@ -9,7 +9,29 @@ export default Component.extend({
   }),
 
   selectedItem: null,
-  shirtColor: '#f00',
+  shirtColor: '#ccc',
+  showResize: computed('selectedItem', function() {
+    if (this.selectedItem) {
+      return true;
+    }
+
+    return false
+  }),
+
+  resizePosition: computed('selectedItem', function() {
+    if (this.selectedItem) {
+      console.log('selectedItem ', this.selectedItem);
+
+      return {
+        x: this.selectedItem.position.x - this.element.offsetLeft,
+        y: this.selectedItem.position.y - this.element.offsetTop,
+        width: this.selectedItem.width,
+        height: this.selectedItem.height
+      };
+    }
+
+    return {};
+  }),
 
   colorChanged: observer('color', function() {
     if (this.selectedItem) {
@@ -34,7 +56,11 @@ export default Component.extend({
 
   actions: {
     iconSelected: function(icon) {
-      this.selectedItem = icon;
+      this.set('selectedItem', icon);
+    },
+
+    resizeEnd: function(position) {
+      this.selectedItem.updatePosition(position);
     }
   }
 });

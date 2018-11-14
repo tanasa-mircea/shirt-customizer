@@ -132,4 +132,29 @@
   &.selected {
     border: 1px solid blue;
   }
+
+  svg {
+    height: 100%;
+    width: 100%;
+  }
+}
+
+.resize-manager {
+  border: 1px solid red;
+  position: absolute;
+
+  &__wrapper {
+    height: 100%;
+    position: relative;
+    width: 100%;
+  }
+}
+
+.resize-point {
+  cursor: pointer;
+  background-color: white;
+  position: absolute;
+  border: 1px solid red;
+  height: 5px;
+  width: 5px;
 }

@@ -1,1 +1,5 @@
-{{yield}}
+<div class="resize-manager__wrapper">
+  {{#each points as |point|}}
+    {{ resize-point position=point move=(action "pointMove") moveEnd=(action "pointMoveEnd")}}
+  {{/each}}
+</div>

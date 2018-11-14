@@ -14,4 +14,8 @@
   {{#each icons as |iconData|}}
     {{ board-icon icon=iconData.icon position=iconData.position parentOffsets=parentOffsets selected=(action 'iconSelected')}}
   {{/each}}
+
+  {{#if showResize}}
+    {{ resize-manager position=resizePosition resizeEnd=(action 'resizeEnd') }}
+  {{/if}}
 </div>
