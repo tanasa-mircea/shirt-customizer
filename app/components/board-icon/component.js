@@ -23,11 +23,20 @@ export default Component.extend(DragNDropMixin, {
     this.set('rawStyle', `top: ${ this.position.y - this.parentOffsets.top }px; left: ${ this.position.x - this.parentOffsets.left}px;`);
   },
 
-  mouseDownOverride: function() {
-
+  mouseDownOverride: function(event) {
+    // Workaround Chrome trigger mousemove at mousedown sometimes https://bugs.chromium.org/p/chromium/issues/detail?id=721341
+    this.mouseDownPosition = {
+      x: event.clientX,
+      y: event.clientY
+    }
   },
 
   mouseMoveOverride: function(event) {
+    if (this.mouseDownPosition.x === event.x && this.mouseDownPosition.y === event.y) {
+      return;
+    }
+
+
     this.set('hasMoved', true);
     this.set('rawStyle', `top: ${ event.y - this.parentOffsets.top }px; left: ${ event.x - this.parentOffsets.left}px;`);
   },

@@ -12,7 +12,7 @@ export default Controller.extend({
       this.set('currentColor', color);
     },
 
-    iconAdded(icon) {
+    iconAdded() {
     }
   }
 });

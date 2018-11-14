@@ -7,7 +7,6 @@ export default Component.extend({
   classNameBindings: ['class'],
   page: 1,
   displayedPage: computed('page', function() {
-    // console.log('test ', this.page)
     return this.page
   }),
 
