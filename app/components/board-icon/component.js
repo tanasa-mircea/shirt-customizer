@@ -13,7 +13,7 @@ export default Component.extend(DragNDropMixin, {
     console.log('dimensionStyle')
     return `height: ${ this.height }px; width: ${ this.width }px`;
   }),
-  style: computed('positionStyle', 'dimensionStyle', function() {
+  style: computed('positionStyle', 'dimensionStyle', 'color', function() {
     return new htmlSafe(this.positionStyle + `fill: ${ this.color };` + this.dimensionStyle);
   }),
   color: '#000',
@@ -54,7 +54,6 @@ export default Component.extend(DragNDropMixin, {
       this.set('hasMoved', false);
       return;
     }
-
 
     this.selected(this);
   },

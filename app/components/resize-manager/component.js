@@ -38,8 +38,16 @@ export default Component.extend({
     ];
   },
 
-  handleLeftPoint: function() {
+  handleLeftPoint: function(data) {
+    let diffX = this.position.x - data.x + this.pointSide * 2,
+        newWidth = diffX + this.position.width,
+        newX = this.position.x - diffX;
 
+    this.set('position.width', newWidth);
+    this.set('position.x', newX);
+
+    this.set('positionStyle', `top: ${ this.position.y }px; left: ${ this.position.x }px;`);
+    this.set('dimensionStyle', `height: ${ this.position.height }px; width: ${ this.position.width }px;`);
   },
 
   handleRightPoint: function(data) {
@@ -48,8 +56,16 @@ export default Component.extend({
     this.set('dimensionStyle', `height: ${ this.position.height }px; width: ${ this.position.width }px;`);
   },
 
-  handleTopPoint: function() {
+  handleTopPoint: function(data) {
+    let diffY = this.position.y - data.y + this.pointSide * 2,
+    newHeight = diffY + this.position.height,
+    newY = this.position.y - diffY;
 
+    this.set('position.height', newHeight);
+    this.set('position.y', newY);
+
+    this.set('positionStyle', `top: ${ this.position.y }px; left: ${ this.position.x }px;`);
+    this.set('dimensionStyle', `height: ${ this.position.height }px; width: ${ this.position.width }px;`);
   },
 
   handleBottomPoint: function(data) {
@@ -87,7 +103,7 @@ export default Component.extend({
     }
   },
 
-  willRender() {
+  didInsertElement() {
     this.set('positionStyle', `top: ${ this.position.y }px; left: ${ this.position.x }px;`);
     this.set('dimensionStyle', `height: ${ this.position.height }px; width: ${ this.position.width }px;`);
   }
