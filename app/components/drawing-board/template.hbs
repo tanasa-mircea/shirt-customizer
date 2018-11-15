@@ -16,6 +16,6 @@
   {{/each}}
 
   {{#if showResize}}
-    {{ resize-manager position=resizePosition resizeEnd=(action 'resizeEnd') }}
+    {{ resize-manager position=resizePosition parentOffsets=parentOffsets resizeEnd=(action 'resizeEnd') }}
   {{/if}}
 </div>

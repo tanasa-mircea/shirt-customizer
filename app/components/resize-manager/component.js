@@ -5,8 +5,12 @@ import { htmlSafe } from '@ember/template';
 export default Component.extend({
   classNameBindings: ['class'],
   attributeBindings: ['style'],
-  positionStyle: '',
-  dimensionStyle: '',
+  positionStyle: computed('position.{x,y}', function() {
+    return `top: ${ this.position.y }px; left: ${ this.position.x }px;`;
+  }),
+  dimensionStyle: computed('position.{width,height}', function() {
+    return `height: ${ this.position.height }px; width: ${ this.position.width }px;`;
+  }),
   pointSide: 5,
   minWidth: 25,
   style: computed('positionStyle', 'dimensionStyle', function() {
@@ -43,35 +47,35 @@ export default Component.extend({
         newWidth = diffX + this.position.width,
         newX = this.position.x - diffX;
 
+    if (newWidth < this.minWidth) {
+      return;
+    }
+
     this.set('position.width', newWidth);
     this.set('position.x', newX);
-
-    this.set('positionStyle', `top: ${ this.position.y }px; left: ${ this.position.x }px;`);
-    this.set('dimensionStyle', `height: ${ this.position.height }px; width: ${ this.position.width }px;`);
   },
 
   handleRightPoint: function(data) {
     let diffX = data.x - this.position.x - this.pointSide * 2;
     this.set('position.width', Math.max(this.minWidth, diffX));
-    this.set('dimensionStyle', `height: ${ this.position.height }px; width: ${ this.position.width }px;`);
   },
 
   handleTopPoint: function(data) {
-    let diffY = this.position.y - data.y + this.pointSide * 2,
+    let diffY = this.position.y - data.y + this.parentOffsets.top,
     newHeight = diffY + this.position.height,
     newY = this.position.y - diffY;
 
+    if (newHeight < this.minWidth) {
+      return;
+    }
+
     this.set('position.height', newHeight);
     this.set('position.y', newY);
-
-    this.set('positionStyle', `top: ${ this.position.y }px; left: ${ this.position.x }px;`);
-    this.set('dimensionStyle', `height: ${ this.position.height }px; width: ${ this.position.width }px;`);
   },
 
   handleBottomPoint: function(data) {
-    let diffY = data.y - this.position.y - this.pointSide * 2;
+    let diffY = data.y - this.position.y - this.parentOffsets.top;
     this.set('position.height', Math.max(this.minWidth, diffY));
-    this.set('dimensionStyle', `height: ${ this.position.height }px; width: ${ this.position.width }px;`);
   },
 
   actions: {
@@ -91,20 +95,27 @@ export default Component.extend({
       if (data.id.indexOf('bottom') >= 0) {
         this.handleBottomPoint(data);
       }
-    },
 
-    pointMoveEnd: function(event) {
+      let trueX = data.x,
+          trueY = data.y;
+
+      if (data.id.indexOf('bottom') >= 0 && data.x  ) {
+        trueY = data.y - this.position.height;
+      }
+
+      if (data.id.indexOf('right') >= 0) {
+        trueX = data.x - this.position.width;
+      }
+
       this.resizeEnd({
-        x: event.x,
-        y: event.y,
+        x: trueX,
+        y: trueY,
         height: this.position.height,
         width: this.position.width
       })
-    }
-  },
+    },
 
-  didInsertElement() {
-    this.set('positionStyle', `top: ${ this.position.y }px; left: ${ this.position.x }px;`);
-    this.set('dimensionStyle', `height: ${ this.position.height }px; width: ${ this.position.width }px;`);
+    pointMoveEnd: function() {
+    }
   }
 });
