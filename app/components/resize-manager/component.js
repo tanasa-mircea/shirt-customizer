@@ -19,28 +19,30 @@ export default Component.extend({
   }),
   class: 'resize-manager',
 
-  init() {
-    this._super();
+  didReceiveAttrs() {
+    this.refreshPoints();
+  },
 
-    this.points = [
+  refreshPoints: function() {
+    this.set('points', [
       {
         id: 'top-left',
         x: -5,
         y: -5
       }, {
         id: 'top-right',
-        x: this.position.width,
+        x: this.position.width - 5,
         y: -5
       }, {
         id: 'bottom-left',
         x: -5,
-        y: this.position.height
+        y: this.position.height - 5
       }, {
         id: 'bottom-right',
-        x: this.position.width,
-        y: this.position.height
+        x: this.position.width - 5,
+        y: this.position.height - 5
       }
-    ];
+    ]);
   },
 
   handleLeftPoint: function(data) {
@@ -107,6 +109,8 @@ export default Component.extend({
       if (data.id.indexOf('right') >= 0) {
         trueX = data.x - this.position.width;
       }
+
+      this.refreshPoints();
 
       this.resizeEnd({
         x: trueX,

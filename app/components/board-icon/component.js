@@ -44,6 +44,7 @@ export default Component.extend(DragNDropMixin, {
     this.set('hasMoved', true);
     this.set('position.x', event.x);
     this.set('position.y', event.y);
+    this.move(this);
   },
 
   mouseUpOverride: function(event) {

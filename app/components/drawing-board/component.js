@@ -69,6 +69,15 @@ export default Component.extend({
 
     resizeEnd: function(position) {
       this.selectedItem.updatePosition(position);
+    },
+
+    iconMove: function(icon) {
+      if (this.selectedItem !== icon) {
+        return;
+      }
+
+      this.set('selectedItem', null);
+      this.set('selectedItem', icon);
     }
   }
 });

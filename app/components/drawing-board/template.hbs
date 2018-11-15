@@ -12,7 +12,7 @@
   </g>
 
   {{#each icons as |iconData|}}
-    {{ board-icon icon=iconData.icon position=iconData.position parentOffsets=parentOffsets selected=(action 'iconSelected')}}
+    {{ board-icon icon=iconData.icon position=iconData.position parentOffsets=parentOffsets move=(action 'iconMove') selected=(action 'iconSelected')}}
   {{/each}}
 
   {{#if showResize}}
