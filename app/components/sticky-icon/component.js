@@ -29,19 +29,20 @@ export default Component.extend(DragNDropMixin, {
     this.set('showTooltip', false);
   },
 
-  mouseDownOverride: function() {
+  mouseDownOverride: function(event) {
     let elementBoundingClient = this.element.getBoundingClientRect();
-
     this.set('hidden', true);
     this.set('dragged', true);
     this.set('originCoords', {
       x: elementBoundingClient.x,
-      y: elementBoundingClient.y
+      y: elementBoundingClient.y,
+      insideX : event.pageX - elementBoundingClient.x,
+      insideY : event.pageY - elementBoundingClient.y
     })
   },
 
   mouseMoveOverride: function(event) {
-    this.set('rawStyle', `left: ${ event.x - this.originCoords.x }px; top: ${ event.y - this.originCoords.y }px;`)
+    this.set('rawStyle', `left: ${ event.x - this.originCoords.insideX - this.originCoords.x }px; top: ${ event.y - this.originCoords.insideX - this.originCoords.y }px;`)
   },
 
   mouseUpOverride: function(event) {
@@ -53,8 +54,8 @@ export default Component.extend(DragNDropMixin, {
       this.boardService.addIcon({
         icon: this.icon,
         position: {
-          x: event.x,
-          y: event.y
+          x: event.x - this.originCoords.insideX,
+          y: event.y - this.originCoords.insideY
         }
       });
     }
