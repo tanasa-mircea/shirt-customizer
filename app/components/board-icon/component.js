@@ -28,7 +28,6 @@ export default Component.extend(DragNDropMixin, {
   }),
 
   mouseDownOverride: function(event) {
-    console.log('mouseDOwn');
     // Workaround Chrome trigger mousemove at mousedown sometimes https://bugs.chromium.org/p/chromium/issues/detail?id=721341
     this.mouseDownPosition = {
       x: event.clientX,

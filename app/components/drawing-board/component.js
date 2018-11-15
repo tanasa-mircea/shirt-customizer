@@ -43,7 +43,6 @@ export default Component.extend({
     let isIcon = event.target.closest('.board-icon, sticky-icon'),
         isResize = event.target.closest('.resize-manager, .options-pane__option canvas, items-gallery__nav > div');
 
-    console.log('event ', event.target)
     if (!isResize && !isIcon) {
       this.set('selectedItem', null);
     }
