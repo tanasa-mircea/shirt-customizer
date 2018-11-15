@@ -39,10 +39,19 @@ export default Component.extend({
     }
   }),
 
+  documentClickHandler: function(event) {
+    let isIcon = event.target.closest('.board-icon'),
+        isResize = event.target.closest('.resize-manager');
+
+    if (!isResize && !isIcon) {
+      this.set('selectedItem', null);
+    }
+  },
 
   init() {
     this._super();
     this.boardService.initBoard();
+    document.addEventListener('click', this.documentClickHandler.bind(this));
   },
 
   didInsertElement() {
