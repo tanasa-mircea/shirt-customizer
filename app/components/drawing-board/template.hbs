@@ -1,15 +1,15 @@
-<div class="drawing-board">
-  <svg fill={{ shirtColor }} class="shirt-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195.27 192.8">
+<svg class="drawing-board" xmlns="http://www.w3.org/2000/svg">
+  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(0 0)">
     {{ sanitize (get shirtSvgs "front") }}
-  </svg>
+  </g>
 
-  <svg fill={{ shirtColor }} class="shirt-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195.27 192.8">
+  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(200 0)">
     {{ sanitize (get shirtSvgs "back") }}
-  </svg>
+  </g>
 
-  <svg fill={{ shirtColor }} class="shirt-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 195.27 192.8">
+  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(400 0)">
     {{ sanitize (get shirtSvgs "side") }}
-  </svg>
+  </g>
 
   {{#each icons as |iconData|}}
     {{ board-icon icon=iconData.icon position=iconData.position parentOffsets=parentOffsets selected=(action 'iconSelected')}}
@@ -18,4 +18,4 @@
   {{#if showResize}}
     {{ resize-manager position=resizePosition parentOffsets=parentOffsets resizeEnd=(action 'resizeEnd') }}
   {{/if}}
-</div>
+</svg>

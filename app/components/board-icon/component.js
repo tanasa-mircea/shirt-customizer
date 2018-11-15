@@ -6,16 +6,17 @@ import DragNDropMixin from '../../mixins/drag-drop';
 
 
 export default Component.extend(DragNDropMixin, {
+  tagName: 'g',
   classNameBindings: ['class'],
-  attributeBindings: ['style'],
+  attributeBindings: ['style', 'positionStyle:transform'],
   positionStyle: computed('position.{x,y}', function() {
-    return `top: ${ this.position.y - this.parentOffsets.top }px; left: ${ this.position.x - this.parentOffsets.left}px;`;
+    return `translate(${ this.position.x - this.parentOffsets.left}, ${ this.position.y - this.parentOffsets.top })`;
   }),
   dimensionStyle: computed('height', 'width', function() {
     return `height: ${ this.height }px; width: ${ this.width }px`;
   }),
-  style: computed('positionStyle', 'dimensionStyle', 'color', function() {
-    return new htmlSafe(this.positionStyle + `fill: ${ this.color };` + this.dimensionStyle);
+  style: computed('dimensionStyle', 'color', function() {
+    return new htmlSafe(`fill: ${ this.color };` + this.dimensionStyle);
   }),
   color: '#000',
   class: 'board-icon',
@@ -27,6 +28,7 @@ export default Component.extend(DragNDropMixin, {
   }),
 
   mouseDownOverride: function(event) {
+    console.log('mouseDOwn');
     // Workaround Chrome trigger mousemove at mousedown sometimes https://bugs.chromium.org/p/chromium/issues/detail?id=721341
     this.mouseDownPosition = {
       x: event.clientX,

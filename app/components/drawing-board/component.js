@@ -40,9 +40,10 @@ export default Component.extend({
   }),
 
   documentClickHandler: function(event) {
-    let isIcon = event.target.closest('.board-icon'),
-        isResize = event.target.closest('.resize-manager');
+    let isIcon = event.target.closest('.board-icon, sticky-icon'),
+        isResize = event.target.closest('.resize-manager, .options-pane__option canvas, items-gallery__nav > div');
 
+    console.log('event ', event.target)
     if (!isResize && !isIcon) {
       this.set('selectedItem', null);
     }
@@ -51,7 +52,7 @@ export default Component.extend({
   init() {
     this._super();
     this.boardService.initBoard();
-    document.addEventListener('click', this.documentClickHandler.bind(this));
+    document.addEventListener('mousedown', this.documentClickHandler.bind(this));
   },
 
   didInsertElement() {

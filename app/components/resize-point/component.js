@@ -4,9 +4,12 @@ import { computed } from '@ember/object';
 import DragNDropMixin from '../../mixins/drag-drop';
 
 export default Component.extend(DragNDropMixin, {
+  tagName: 'rect',
   classNameBindings: ['class'],
-  attributeBindings: ['style'],
+  attributeBindings: ['style', 'x', 'y'],
   rawStyle: '',
+  x: 0,
+  y: 0,
   style: computed('rawStyle', function() {
     return new htmlSafe(this.rawStyle);
   }),
@@ -14,8 +17,8 @@ export default Component.extend(DragNDropMixin, {
 
   init() {
     this._super();
-
-    this.set('rawStyle', `top: calc(${ this.position.y } - 2.5px); left: calc(${ this.position.x } - 2.5px);`);
+    this.set('x', this.position.x);
+    this.set('y', this.position.y);
   },
 
   mouseDownOverride: function() {

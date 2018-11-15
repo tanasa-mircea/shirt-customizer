@@ -3,7 +3,9 @@
     <div class="items-gallery__item" style={{ galleryItemStyle }}>
       {{#sticky-icon icon=icon as |iconData|}}
         {{#tool-tip visible=iconData.showTooltip}}
-          {{ iconData.icon }}
+          <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'>
+            {{ iconData.icon }}
+          </svg>
         {{/tool-tip}}
       {{/sticky-icon}}
     </div>

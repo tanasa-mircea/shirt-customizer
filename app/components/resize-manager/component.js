@@ -3,18 +3,19 @@ import { computed } from '@ember/object';
 import { htmlSafe } from '@ember/template';
 
 export default Component.extend({
+  tagName: 'g',
   classNameBindings: ['class'],
-  attributeBindings: ['style'],
-  positionStyle: computed('position.{x,y}', function() {
-    return `top: ${ this.position.y }px; left: ${ this.position.x }px;`;
+  attributeBindings: ['style', 'transform'],
+  transform: computed('position.{x,y}', function() {
+    return `translate(${ this.position.x } ${ this.position.y })`;
   }),
   dimensionStyle: computed('position.{width,height}', function() {
     return `height: ${ this.position.height }px; width: ${ this.position.width }px;`;
   }),
   pointSide: 5,
   minWidth: 25,
-  style: computed('positionStyle', 'dimensionStyle', function() {
-    return new htmlSafe(this.positionStyle + this.dimensionStyle);
+  style: computed('dimensionStyle', function() {
+    return new htmlSafe(this.dimensionStyle);
   }),
   class: 'resize-manager',
 
@@ -24,20 +25,20 @@ export default Component.extend({
     this.points = [
       {
         id: 'top-left',
-        x: '0%',
-        y: '0%'
+        x: -5,
+        y: -5
       }, {
         id: 'top-right',
-        x: '100%',
-        y: '0%'
+        x: this.position.width,
+        y: -5
       }, {
         id: 'bottom-left',
-        x: '0%',
-        y: '100%'
+        x: -5,
+        y: this.position.height
       }, {
         id: 'bottom-right',
-        x: '100%',
-        y: '100%'
+        x: this.position.width,
+        y: this.position.height
       }
     ];
   },
