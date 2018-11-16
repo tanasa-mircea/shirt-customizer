@@ -24,11 +24,11 @@ export default Component.extend({
   }),
 
   actions: {
-    iconMove: function() {
-      this.iconMove();
+    iconMove: function(icon) {
+      this.iconMove(icon);
     },
-    iconSelected: function() {
-      this.iconSelected();
+    iconSelected: function(icon) {
+      this.iconSelected(icon);
     }
   }
 });
