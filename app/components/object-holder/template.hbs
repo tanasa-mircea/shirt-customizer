@@ -1,0 +1,13 @@
+<defs>
+  <clipPath id={{ clipPathId }}>
+    {{ sanitize displayObject }}
+  </clipPath>
+</defs>
+
+<g fill={{ color }} clip-path={{ clipPathUrl }}>
+  {{ sanitize displayObject }}
+
+  {{#each icons as |iconData|}}
+    {{ board-icon icon=iconData.icon position=iconData.position parentOffsets=currentOffsets move=(action "iconMove") selected=(action "iconSelected")}}
+  {{/each}}
+</g>

@@ -51,14 +51,29 @@ export default Component.extend({
   init() {
     this._super();
     this.boardService.initBoard();
+    this.shirts = {
+      front: {
+        icons: [],
+        translateX: 0
+      },
+      back: {
+        icons: [],
+        translateX: 200
+      },
+      side: {
+        icons: [],
+        translateX: 400
+      }
+    }
+
     document.addEventListener('mousedown', this.documentClickHandler.bind(this));
   },
 
   didInsertElement() {
-    this.parentOffsets = {
+    this.set('parentOffsets', {
       left: this.element.offsetLeft,
       top: this.element.offsetTop
-    }
+    })
   },
 
   actions: {

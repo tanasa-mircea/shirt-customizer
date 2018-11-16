@@ -1,38 +1,9 @@
 <svg class="drawing-board" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <clipPath id="shirtFrontClip">
-      {{ sanitize (get shirtSvgs "front") }}
-    </clipPath>
-
-    <clipPath id="shirtBackClip">
-      {{ sanitize (get shirtSvgs "back") }}
-    </clipPath>
-
-    <clipPath id="shirtSideClip">
-      {{ sanitize (get shirtSvgs "side") }}
-    </clipPath>
-  </defs>
-
-  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(0 0)" clip-path="url(#shirtFrontClip)" data-index="0">
-    {{ sanitize (get shirtSvgs "front") }}
-  </g>
-
-  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(200 0)" clip-path="url(#shirtBackClip)" data-index="1">
-    {{ sanitize (get shirtSvgs "back") }}
-  </g>
-
-  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(400 0)" clip-path="url(#shirtSideClip)" data-index="2">
-    {{ sanitize (get shirtSvgs "side") }}
-  </g>
-
-  {{#each icons as |iconData|}}
-    {{ board-icon icon=iconData.icon position=iconData.position parentOffsets=parentOffsets move=(action 'iconMove') selected=(action 'iconSelected')}}
-  {{/each}}
+  {{#each-in shirts as |key value|}}
+    {{ object-holder displayObject=(get shirtSvgs key) color=shirtColor parentOffsets=parentOffsets translateX=(get value 'translateX') index=key icons=(get icons key)}}
+  {{/each-in}}
 
   {{#if showResize}}
-    {{ resize-manager position=resizePosition parentOffsets=parentOffsets resizeEnd=(action 'resizeEnd') }}
+    {{ resize-manager position=resizePosition parentOffsets=parentOffsets resizeEnd=(action "resizeEnd") }}
   {{/if}}
-
-  <use clip-path="url(#shirtFrontClip)"  fill="red" />
-
 </svg>
