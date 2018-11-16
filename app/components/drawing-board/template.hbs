@@ -1,13 +1,27 @@
 <svg class="drawing-board" xmlns="http://www.w3.org/2000/svg">
-  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(0 0)">
+  <defs>
+    <clipPath id="shirtFrontClip">
+      {{ sanitize (get shirtSvgs "front") }}
+    </clipPath>
+
+    <clipPath id="shirtBackClip">
+      {{ sanitize (get shirtSvgs "back") }}
+    </clipPath>
+
+    <clipPath id="shirtSideClip">
+      {{ sanitize (get shirtSvgs "side") }}
+    </clipPath>
+  </defs>
+
+  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(0 0)" clip-path="url(#shirtFrontClip)" data-index="0">
     {{ sanitize (get shirtSvgs "front") }}
   </g>
 
-  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(200 0)">
+  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(200 0)" clip-path="url(#shirtBackClip)" data-index="1">
     {{ sanitize (get shirtSvgs "back") }}
   </g>
 
-  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(400 0)">
+  <g fill={{ shirtColor }} class="shirt-svg" transform="translate(400 0)" clip-path="url(#shirtSideClip)" data-index="2">
     {{ sanitize (get shirtSvgs "side") }}
   </g>
 
@@ -18,4 +32,7 @@
   {{#if showResize}}
     {{ resize-manager position=resizePosition parentOffsets=parentOffsets resizeEnd=(action 'resizeEnd') }}
   {{/if}}
+
+  <use clip-path="url(#shirtFrontClip)"  fill="red" />
+
 </svg>
