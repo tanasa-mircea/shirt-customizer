@@ -2,7 +2,7 @@
   "options": [
     {
       "name": "Color",
-      "component": "color-picker-canvas"
+      "component": "color-picker"
     }, {
       "name": "Icons",
       "component": "items-gallery",

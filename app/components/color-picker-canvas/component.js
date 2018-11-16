@@ -43,10 +43,12 @@ export default Component.extend({
   },
 
   click(event) {
-    // debugger
     let color = this.context.getImageData(event.offsetX, event.offsetY, 1, 1).data;
-
     this.change(this.toRgb(color));
+  },
 
+  mouseMove () {
+    let color = this.context.getImageData(event.offsetX, event.offsetY, 1, 1).data;
+    this.hover(this.toRgb(color));
   }
 });

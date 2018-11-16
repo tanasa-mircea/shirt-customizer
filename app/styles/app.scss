@@ -49,6 +49,16 @@
   &__row {
     display: flex;
   }
+
+  &__magnifier {
+    border-radius: 50%;
+    border: 1px solid black;
+    box-shadow: 0 0 5px black;
+    height: 25px;
+    position: absolute;
+    width: 25px;
+    z-index: 2;
+  }
 }
 
 .color-point {

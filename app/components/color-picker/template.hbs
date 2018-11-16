@@ -1,0 +1,5 @@
+{{ color-picker-canvas change=(action "colorChanged") hover=(action "canvasHover") }}
+
+{{#if isHovered}}
+  <div class="color-picker__magnifier" style={{magnifierStyle}}></div>
+{{/if}}
