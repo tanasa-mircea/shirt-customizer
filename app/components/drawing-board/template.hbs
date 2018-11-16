@@ -1,6 +1,6 @@
 <svg class="drawing-board" xmlns="http://www.w3.org/2000/svg">
   {{#each-in shirts as |key value|}}
-    {{ object-holder displayObject=(get shirtSvgs key) color=shirtColor parentOffsets=parentOffsets translateX=(get value 'translateX') index=key icons=(get icons key)}}
+    {{ object-holder displayObject=(get shirtSvgs key) color=shirtColor parentOffsets=parentOffsets translateX=(get value 'translateX') index=key icons=(get icons key) iconMove=(action "iconMove") iconSelected=(action "iconSelected")}}
   {{/each-in}}
 
   {{#if showResize}}
