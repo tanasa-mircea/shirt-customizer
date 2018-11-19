@@ -60,7 +60,6 @@ export default Component.extend(DragNDropMixin, {
   },
 
   mouseUpOverride: function(event) {
-    console.log('event.target ', event.target)
     this.set('invisible', false);
 
     let shirtParent = event.target.closest('.shirt-svg');
