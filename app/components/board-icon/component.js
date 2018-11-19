@@ -35,14 +35,6 @@ export default Component.extend(DragNDropMixin, {
       x: event.clientX,
       y: event.clientY,
     }
-
-    this.set('invisible', true);
-
-    this.cloneElement = this.element.cloneNode(true);
-
-    let parent = this.element.closest('.drawing-board');
-    parent.appendChild(this.cloneElement);
-    this.cloneElement.style.transform = `translate(${ event.clientX - this.boardOffset.left }px, ${ event.clientY - this.boardOffset.top }px)`;
   },
 
   mouseMoveOverride: function(event) {
@@ -50,50 +42,48 @@ export default Component.extend(DragNDropMixin, {
       return;
     }
 
-    this.set('hasMoved', true);
+    if (!this.invisible) {
+      this.set('invisible', true);
+
+      this.cloneElement = this.element.cloneNode(true);
+
+      let board = this.element.closest('.drawing-board');
+      board.appendChild(this.cloneElement);
+    }
+
+    if (!this.hasMoved) {
+      this.set('hasMoved', true);
+    }
+
     this.set('position.x', event.x);
     this.set('position.y', event.y);
     this.move(this);
-
 
     this.cloneElement.style.transform = `translate(${ event.x - this.boardOffset.left }px, ${ event.y - this.boardOffset.top }px)`;
   },
 
   mouseUpOverride: function(event) {
+    console.log('mouseUp ', this.hasMoved)
+    if (!this.hasMoved) {
+      this.selected(this);
+
+      return;
+    }
+
     this.set('invisible', false);
+    this.set('position.x', event.x);
+    this.set('position.y', event.y);
+    this.set('hasMoved', false);
 
     let shirtParent = event.target.closest('.shirt-svg');
-
     if (shirtParent && shirtParent.dataset.index !== this.parentIndex) {
       this.replaceParent(this, shirtParent.dataset.index);
-      let parent = this.element.closest('.drawing-board');
-      parent.removeChild(this.cloneElement);
-      return;
-    } else {
-      this.set('invisible', false);
-      let parent = this.element.closest('.drawing-board');
-      parent.removeChild(this.cloneElement);
     }
 
-    // if (shirtParent) {
-    //   this.boardService.addIcon({
-    //     parentId: shirtParent.dataset.index,
-    //     icon: this.icon,
-    //     position: {
-    //       x: event.x - this.originCoords.insideX,
-    //       y: event.y - this.originCoords.insideY
-    //     }
-    //   });
-    // }
-
-    if (this.hasMoved) {
-      this.set('position.x', event.x);
-      this.set('position.y', event.y);
-      this.set('hasMoved', false);
-      return;
+    if (this.cloneElement) {
+      let board = this.element.closest('.drawing-board');
+      board.removeChild(this.cloneElement);
     }
-
-    this.selected(this);
   },
 
   changeColor: function(color) {
