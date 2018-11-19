@@ -64,7 +64,7 @@ export default Component.extend({
   },
 
   handleTopPoint: function(data) {
-    let diffY = this.position.y - data.y + this.parentOffsets.top,
+    let diffY = this.position.y - data.y + this.boardOffset.top,
     newHeight = diffY + this.position.height,
     newY = this.position.y - diffY;
 
@@ -77,7 +77,7 @@ export default Component.extend({
   },
 
   handleBottomPoint: function(data) {
-    let diffY = data.y - this.position.y - this.parentOffsets.top;
+    let diffY = data.y - this.position.y - this.boardOffset.top;
     this.set('position.height', Math.max(this.minWidth, diffY));
   },
 

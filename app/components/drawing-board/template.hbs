@@ -1,9 +1,19 @@
 <svg class="drawing-board" xmlns="http://www.w3.org/2000/svg">
   {{#each-in shirts as |key value|}}
-    {{ object-holder displayObject=(get shirtSvgs key) color=shirtColor parentOffsets=parentOffsets translateX=(get value 'translateX') index=key icons=(get icons key) iconMove=(action "iconMove") iconSelected=(action "iconSelected")}}
+    {{ object-holder
+      displayObject=(get shirtSvgs key)
+      color=shirtColor
+      boardOffset=boardOffset
+      translateX=(get value 'translateX')
+      index=key
+      icons=(get icons key)
+      iconMove=(action "iconMove")
+      iconSelected=(action "iconSelected")
+      replaceIconParent=(action "replaceIconParent")
+    }}
   {{/each-in}}
 
   {{#if showResize}}
-    {{ resize-manager position=resizePosition parentOffsets=parentOffsets resizeEnd=(action "resizeEnd") }}
+    {{ resize-manager position=resizePosition boardOffset=boardOffset resizeEnd=(action "resizeEnd") }}
   {{/if}}
 </svg>

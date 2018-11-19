@@ -7,6 +7,9 @@ export default Component.extend({
   icons: computed('boardService.icons', function() {
     return this.boardService.icons;
   }),
+  boardActiveIcon: computed('boardService.boardActiveIcon', function() {
+    return this.boardService.boardActiveIcon;
+  }),
 
   selectedItem: null,
   shirtColor: '#ccc',
@@ -54,15 +57,15 @@ export default Component.extend({
     this.shirts = {
       front: {
         icons: [],
-        translateX: 0
+        translateX: 25
       },
       back: {
         icons: [],
-        translateX: 200
+        translateX: 225
       },
       side: {
         icons: [],
-        translateX: 400
+        translateX: 425
       }
     }
 
@@ -70,7 +73,7 @@ export default Component.extend({
   },
 
   didInsertElement() {
-    this.set('parentOffsets', {
+    this.set('boardOffset', {
       left: this.element.offsetLeft,
       top: this.element.offsetTop
     })
@@ -92,6 +95,17 @@ export default Component.extend({
 
       this.set('selectedItem', null);
       this.set('selectedItem', icon);
+    },
+
+    replaceIconParent: function(icon, newParent) {
+      this.boardService.addIcon({
+        parentId: newParent,
+        icon: icon.icon,
+        position: {
+          x: icon.position.x,
+          y: icon.position.y
+        }
+      })
     }
   }
 });

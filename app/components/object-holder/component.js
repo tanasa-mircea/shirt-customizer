@@ -16,10 +16,10 @@ export default Component.extend({
   clipPathUrl: computed('clipPathId', function() {
     return `url(#${this.clipPathId})`;
   }),
-  currentOffsets: computed('parentOffsets.top', 'translateX', function() {
+  currentOffsets: computed('boardOffset.top', 'translateX', function() {
     return {
       left: this.translateX,
-      top: this.parentOffsets.top
+      top: 0
     }
   }),
 
@@ -29,6 +29,9 @@ export default Component.extend({
     },
     iconSelected: function(icon) {
       this.iconSelected(icon);
+    },
+    replaceIconParent: function(icon, newParent) {
+      this.replaceIconParent(icon, newParent);
     }
   }
 });

@@ -8,6 +8,16 @@
   {{ sanitize displayObject }}
 
   {{#each icons as |iconData|}}
-    {{ board-icon icon=iconData.icon position=iconData.position parentOffsets=currentOffsets move=(action "iconMove") selected=(action "iconSelected")}}
+    {{ board-icon
+        parentIndex=index
+        icon=iconData.icon
+        position=iconData.position
+        currentIndex=iconData.currentIndex
+        parentOffset=currentOffsets
+        boardOffset=boardOffset
+        move=(action "iconMove")
+        selected=(action "iconSelected")
+        replaceParent=(action "replaceIconParent")
+      }}
   {{/each}}
 </g>

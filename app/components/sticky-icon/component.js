@@ -6,6 +6,7 @@ import DragNDropMixin from '../../mixins/drag-drop';
 
 export default Component.extend(DragNDropMixin, {
   classNameBindings: ['class', 'hidden', 'dragged'],
+  tagName: 'g',
   attributeBindings: ['style'],
   rawStyle: '',
   style: computed('rawStyle', function() {
