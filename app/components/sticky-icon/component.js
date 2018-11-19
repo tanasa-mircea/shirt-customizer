@@ -18,16 +18,25 @@ export default Component.extend(DragNDropMixin, {
   class: 'sticky-icon',
   iconsService: service('icons'),
   boardService: service('board'),
+  tooltipService: service('tooltip'),
   sanitizedIcon: computed('icon', function() {
     return new htmlSafe(this.iconsService.get(this.icon));
   }),
 
   mouseEnter() {
-    this.set('showTooltip', true);
+    this.tooltipService.updatePosition({
+      x: 0,
+      y: 0
+    });
+    this.tooltipService.updateContent({
+      type: 'text',
+      body: 'testtest'
+    })
+    this.tooltipService.show();
   },
 
   mouseLeave() {
-    this.set('showTooltip', false);
+    this.tooltipService.hide();
   },
 
   mouseDownOverride: function(event) {
