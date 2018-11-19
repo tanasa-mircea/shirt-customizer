@@ -32,8 +32,10 @@ export default Component.extend(DragNDropMixin, {
   mouseDownOverride: function(event) {
     // Workaround Chrome trigger mousemove at mousedown sometimes https://bugs.chromium.org/p/chromium/issues/detail?id=721341
     this.mouseDownPosition = {
-      x: event.clientX,
-      y: event.clientY,
+      x: event.pageX,
+      y: event.pageY,
+      insideX: event.pageX - this.position.x,
+      insideY: event.pageY - this.position.y
     }
   },
 
@@ -55,15 +57,15 @@ export default Component.extend(DragNDropMixin, {
       this.set('hasMoved', true);
     }
 
-    this.set('position.x', event.x);
-    this.set('position.y', event.y);
+    this.set('position.x', event.x - this.mouseDownPosition.insideX);
+    this.set('position.y', event.y - this.mouseDownPosition.insideY);
     this.move(this);
 
-    this.cloneElement.style.transform = `translate(${ event.x - this.boardOffset.left }px, ${ event.y - this.boardOffset.top }px)`;
+    this.cloneElement.classList.add('icon-clone');
+    this.cloneElement.style.transform = `translate(${ event.x - this.boardOffset.left - this.mouseDownPosition.insideX }px, ${ event.y - this.boardOffset.top - this.mouseDownPosition.insideY}px)`;
   },
 
   mouseUpOverride: function(event) {
-    console.log('mouseUp ', this.hasMoved)
     if (!this.hasMoved) {
       this.selected(this);
 
@@ -71,13 +73,18 @@ export default Component.extend(DragNDropMixin, {
     }
 
     this.set('invisible', false);
-    this.set('position.x', event.x);
-    this.set('position.y', event.y);
+    this.set('position.x', event.x - this.mouseDownPosition.insideX);
+    this.set('position.y', event.y - this.mouseDownPosition.insideY);
     this.set('hasMoved', false);
 
     let shirtParent = event.target.closest('.shirt-svg');
     if (shirtParent && shirtParent.dataset.index !== this.parentIndex) {
       this.replaceParent(this, shirtParent.dataset.index);
+    }
+
+    if (!shirtParent) {
+      this.set('position.x', this.mouseDownPosition.x - this.mouseDownPosition.insideX);
+      this.set('position.y', this.mouseDownPosition.y - this.mouseDownPosition.insideY);
     }
 
     if (this.cloneElement) {

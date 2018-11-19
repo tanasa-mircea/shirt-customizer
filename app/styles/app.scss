@@ -4,6 +4,7 @@ body {
 
 .invisible {
   opacity: 0;
+  pointer-events: none;
 }
 
 .main-wrapper {
@@ -150,6 +151,10 @@ body {
 
   &.selected {
     border: 1px solid blue;
+  }
+
+  &.icon-clone {
+    pointer-events: none;
   }
 
   svg {
