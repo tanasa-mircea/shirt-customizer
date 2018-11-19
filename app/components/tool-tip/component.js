@@ -1,6 +1,6 @@
 import Component from '@ember/component';
 import { inject as service } from '@ember/service';
-import { computed, observer } from '@ember/object';
+import { observer } from '@ember/object';
 
 export default Component.extend({
   classes: 'tooltip',
@@ -9,10 +9,4 @@ export default Component.extend({
   visibleObserve: observer('tooltipService.visible', function() {
     this.set('visible', this.tooltipService.visible);
   }),
-
-  init() {
-    this._super();
-    console.log('test ', this.visible)
-    console.log('test serv ', this.tooltipService.visible)
-  }
 });
