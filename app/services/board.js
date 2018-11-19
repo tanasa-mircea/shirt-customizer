@@ -19,6 +19,8 @@ export default Service.extend({
     let newIconsVector = this.icons[icon.parentId].concat([icon]);
 
     set(this.icons, icon.parentId, newIconsVector);
+
+    return icon;
   },
 
   updateIconsIndexes: function() {

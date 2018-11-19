@@ -43,7 +43,7 @@ export default Component.extend(DragNDropMixin, {
   },
 
   mouseMoveOverride: function(event) {
-    this.set('rawStyle', `left: ${ event.x - this.originCoords.insideX - this.originCoords.x }px; top: ${ event.y - this.originCoords.insideX - this.originCoords.y }px;`)
+    this.set('rawStyle', `left: ${ event.x - this.originCoords.insideX - this.originCoords.x }px; top: ${ event.y - this.originCoords.insideY - this.originCoords.y }px;`)
   },
 
   mouseUpOverride: function(event) {
@@ -59,7 +59,9 @@ export default Component.extend(DragNDropMixin, {
         position: {
           x: event.x - this.originCoords.insideX,
           y: event.y - this.originCoords.insideY
-        }
+        },
+        width: 40,
+        height: 40
       });
     }
   }

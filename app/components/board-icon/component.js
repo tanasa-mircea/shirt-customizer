@@ -29,6 +29,12 @@ export default Component.extend(DragNDropMixin, {
     return new htmlSafe(this.iconsService.get(this.icon));
   }),
 
+  didInsertElement() {
+    if (this.isSelected) {
+      this.selected(this);
+    }
+  },
+
   mouseDownOverride: function(event) {
     // Workaround Chrome trigger mousemove at mousedown sometimes https://bugs.chromium.org/p/chromium/issues/detail?id=721341
     this.mouseDownPosition = {

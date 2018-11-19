@@ -98,13 +98,18 @@ export default Component.extend({
     },
 
     replaceIconParent: function(icon, newParent) {
+      let isSelected = this.selectedItem ? true : false;
+
       this.boardService.addIcon({
         parentId: newParent,
         icon: icon.icon,
         position: {
           x: icon.position.x,
           y: icon.position.y
-        }
+        },
+        width: icon.width,
+        height: icon.height,
+        selected: isSelected
       })
     }
   }
