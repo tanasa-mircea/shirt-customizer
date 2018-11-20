@@ -24,10 +24,14 @@ export default Component.extend(DragNDropMixin, {
   }),
 
   mouseEnter() {
+    let boundingClientRect = this.element.getBoundingClientRect();
     this.tooltipService.updatePosition({
-      x: 0,
-      y: 0
+      x: boundingClientRect.x + boundingClientRect.width,
+      y: boundingClientRect.y + boundingClientRect.height,
+      minX: boundingClientRect.x,
+      minY: boundingClientRect.y
     });
+
     this.tooltipService.updateContent({
       type: 'text',
       body: 'testtest'
