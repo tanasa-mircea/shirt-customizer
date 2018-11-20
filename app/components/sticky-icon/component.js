@@ -33,8 +33,8 @@ export default Component.extend(DragNDropMixin, {
     });
 
     this.tooltipService.updateContent({
-      type: 'text',
-      body: 'testtest'
+      type: 'svg',
+      body: this.sanitizedIcon
     })
     this.tooltipService.show();
   },

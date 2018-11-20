@@ -128,8 +128,9 @@ body {
   width: 100px;
   height: 100px;
 
-  svg {
+  &__svg {
     width: 100%;
+    height: 100%;
   }
 
   &.visible {
