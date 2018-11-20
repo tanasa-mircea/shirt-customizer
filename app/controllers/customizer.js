@@ -6,10 +6,10 @@ export default Controller.extend({
     this.icons = [];
   },
 
-  currentColor: '#f00',
+  color: '#f00',
   actions: {
-    colorChanged(color) {
-      this.set('currentColor', color);
+    optionChange(type, value) {
+      this.set(type, value);
     },
 
     iconAdded() {

@@ -1,0 +1,3 @@
+{{#each options.options as |option|}}
+  {{ radio-button label=option option=option change=(action "inputChange") active=(eq option currentSelected)}}
+{{/each}}

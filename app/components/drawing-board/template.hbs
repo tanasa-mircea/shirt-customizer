@@ -3,6 +3,7 @@
     {{ object-holder
       displayObject=(get shirtSvgs key)
       color=shirtColor
+      size=size
       boardOffset=boardOffset
       translateX=(get value 'translateX')
       index=key
@@ -16,4 +17,5 @@
   {{#if showResize}}
     {{ resize-manager position=resizePosition boardOffset=boardOffset resizeEnd=(action "resizeEnd") }}
   {{/if}}
+
 </svg>

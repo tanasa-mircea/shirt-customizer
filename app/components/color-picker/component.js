@@ -27,7 +27,7 @@ export default Component.extend({
 
   actions: {
     colorChanged: function(color) {
-      this.change(color);
+      this.optionChange('color', color);
     },
 
     canvasHover: function(color) {

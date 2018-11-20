@@ -1,8 +1,8 @@
 <h1>Shirt Customizer</h1>
 
 <div class="main-wrapper">
-  {{ drawing-board color=currentColor shirtSvgs=model.[0] }}
-  {{ options-pane colorChanged=(action "colorChanged") options=model.[1].options }}
+  {{ drawing-board color=color size=size shirtSvgs=model.[0] }}
+  {{ options-pane optionChange=(action "optionChange") options=model.[1].options }}
 </div>
 
 {{ tool-tip visible=visible}}

@@ -2,7 +2,7 @@
   {{#each options as |option|}}
     <div class="options-pane__option">
       <h2>{{ option.name }}</h2>
-      {{ component option.component change=(action "colorChanged") options=option.config }}
+      {{ component option.component optionChange=(action "optionChange") options=option.config }}
     </div>
   {{/each}}
 </div>
