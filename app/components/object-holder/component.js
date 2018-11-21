@@ -52,6 +52,9 @@ export default Component.extend({
     },
     replaceIconParent: function(icon, newParent) {
       this.replaceIconParent(icon, newParent);
+    },
+    removeIcon: function(icon) {
+      this.removeIcon(icon);
     }
   }
 });

@@ -97,6 +97,10 @@ export default Component.extend({
       this.set('selectedItem', icon);
     },
 
+    removeIcon: function(icon) {
+      this.boardService.removeIcon(icon)
+    },
+
     replaceIconParent: function(icon, newParent) {
       let isSelected = this.selectedItem ? true : false;
 

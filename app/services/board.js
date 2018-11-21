@@ -1,7 +1,6 @@
 import Service from '@ember/service';
 import { set } from '@ember/object';
 
-
 export default Service.extend({
   icons: null,
   boardActiveIcon: null,
@@ -23,26 +22,25 @@ export default Service.extend({
     return icon;
   },
 
+  removeIcon: function(icon) {
+    let iconsCopy = [].concat(this.icons[icon.parentIndex]);
+    iconsCopy.splice(icon.currentIndex, 1);
+
+    set(this.icons, icon.parentIndex, iconsCopy);
+    this.updateIconsIndexes();
+  },
+
   updateIconsIndexes: function() {
-    let newIcons = this.icons.map(function(icon, index) {
-      icon.currentIndex = index;
+    let typesArray = Object.keys(this.icons);
 
-      return icon;
-    })
+    for (let i = 0; i < typesArray.length; i++) {
+      let newIconsArray = this.icons[typesArray[i]].map(function(icon, index) {
+        set(icon, 'currentIndex', index);
+        return icon;
+      })
 
-    this.set('icons', newIcons);
-  },
-
-  setBoardActiveIcon(icon) {
-    // let newIcons = this.icons.slice(icon.currentIndex, 1);
-    // this.set('icons', newIcons);
-    // this.updateIconsIndexes();
-
-    this.set('boardActiveIcon', icon);
-  },
-
-  unsetBoardActiveIcon() {
-    this.set('boardActiveIcon', null);
+      set(this.icons, typesArray[i], newIconsArray);
+    }
   },
 
   initBoard: function() {

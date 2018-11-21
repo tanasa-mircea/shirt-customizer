@@ -86,16 +86,16 @@ export default Component.extend(DragNDropMixin, {
     let shirtParent = event.target.closest('.shirt-svg');
     if (shirtParent && shirtParent.dataset.index !== this.parentIndex) {
       this.replaceParent(this, shirtParent.dataset.index);
-    }
-
-    if (!shirtParent) {
-      this.set('position.x', this.mouseDownPosition.x - this.mouseDownPosition.insideX);
-      this.set('position.y', this.mouseDownPosition.y - this.mouseDownPosition.insideY);
+      this.removeIcon(this);
     }
 
     if (this.cloneElement) {
       let board = this.element.closest('.drawing-board');
       board.removeChild(this.cloneElement);
+    }
+
+    if (!shirtParent) {
+      this.removeIcon(this);
     }
   },
 

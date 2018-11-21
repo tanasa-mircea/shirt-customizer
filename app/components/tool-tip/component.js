@@ -50,12 +50,5 @@ export default Component.extend({
     }
 
     return new htmlSafe(this.tooltipService.content.body);
-  }),
-
-  init() {
-    this._super();
-    console.log('test serv ', this.tooltipService.visible)
-  }
-
-
+  })
 });
