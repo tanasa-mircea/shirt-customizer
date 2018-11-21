@@ -69,6 +69,7 @@ export default Component.extend(DragNDropMixin, {
       this.boardService.addIcon({
         parentId: shirtParent.dataset.index,
         icon: this.icon,
+        color: '#000',
         position: {
           x: event.x - this.originCoords.insideX,
           y: event.y - this.originCoords.insideY

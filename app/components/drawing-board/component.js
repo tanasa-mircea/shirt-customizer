@@ -98,15 +98,19 @@ export default Component.extend({
     },
 
     removeIcon: function(icon) {
+      if (this.selectedItem === icon) {
+        this.set('selectedItem', null);
+      }
+
       this.boardService.removeIcon(icon)
     },
 
     replaceIconParent: function(icon, newParent) {
       let isSelected = this.selectedItem ? true : false;
-
       this.boardService.addIcon({
         parentId: newParent,
         icon: icon.icon,
+        color: icon.color,
         position: {
           x: icon.position.x,
           y: icon.position.y
