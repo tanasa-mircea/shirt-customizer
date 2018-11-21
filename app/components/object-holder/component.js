@@ -11,10 +11,7 @@ export default Component.extend({
     return `translate(${ this.translateX * this.shirtSize } 0)`;
   }),
   shirtSize: computed('size', function() {
-    if (!this.size) {
-      return 1;
-    }
-
+    console.log('size ', this.size)
     return this.sizeDictionary[this.size];
   }),
   shirtScale: computed('shirtSize', function() {
