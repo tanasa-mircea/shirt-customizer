@@ -1,8 +1,17 @@
 <h1>Shirt Customizer</h1>
 
 <div class="main-wrapper">
-  {{ drawing-board color=color size=size shirtSvgs=model.[0] }}
+  {{ drawing-board color=color size=size shirtSvgs=model.[0] saveDrawingboardSvg=(action "saveDrawingboardSvg") }}
   {{ options-pane optionChange=(action "optionChange") options=model.[1].options }}
 </div>
 
-{{ tool-tip visible=visible}}
+{{ tool-tip visible=visible }}
+<button {{ action "save" on="click" }}>Save</button>
+
+{{#if overlayDisplayed}}
+  <div class="overlay">
+    {{ image-display svg=svg svgConverted=(action "svgConverted") }}
+    <img src={{imageUrl}} alt="">
+  </div>
+{{/if}}
+

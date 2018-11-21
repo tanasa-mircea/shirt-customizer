@@ -7,12 +7,25 @@ export default Controller.extend({
   },
 
   color: '#f00',
+  overlayDisplayed: false,
   actions: {
     optionChange(type, value) {
       this.set(type, value);
     },
 
     iconAdded() {
+    },
+
+    save() {
+      this.set('overlayDisplayed', true);
+    },
+
+    saveDrawingboardSvg(svg) {
+      this.set('svg', svg[0]);
+    },
+
+    svgConverted(image) {
+      this.set('imageUrl', image);
     }
   }
 });

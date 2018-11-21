@@ -7,9 +7,6 @@ export default Component.extend({
   style: '',
   attributeBindings: ['height', 'width'],
 
-  willRender: function() {
-  },
-
   didRender() {
     this.canvas = this.get('element');
     this.context = this.canvas.getContext('2d');

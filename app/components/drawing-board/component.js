@@ -77,6 +77,9 @@ export default Component.extend({
       left: this.element.offsetLeft,
       top: this.element.offsetTop
     })
+
+    let svg = this.element.getElementsByTagName('svg');
+    this.saveDrawingboardSvg(svg);
   },
 
   actions: {

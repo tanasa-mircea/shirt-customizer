@@ -199,3 +199,20 @@ body {
     border-color: red;
   }
 }
+
+.overlay {
+  align-items: center;
+  background-color: #ddd;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  canvas {
+    position: absolute;
+    z-index: -1;
+  }
+}
