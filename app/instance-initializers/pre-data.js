@@ -1,7 +1,7 @@
 export function initialize(container) {
-  let objectHolderComponent = container.lookup("component:object-holder");
-  console.log("container.defaultSize", container.get("application.defaultSize"));
-  objectHolderComponent.updateSize();
+  let iconsService = container.lookup("service:icons");
+  let preloadedIcons = container.get("application.preloadedIcons");
+  iconsService.updateIcons(preloadedIcons);
 }
 
 export default {

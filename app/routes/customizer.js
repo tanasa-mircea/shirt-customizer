@@ -7,8 +7,7 @@ export default Route.extend({
   model() {
     return Promise.all([
       $.getJSON("/data/shirts.json"),
-      $.getJSON("/data/config.json"),
-      this.iconsService.initData()
+      $.getJSON("/data/config.json")
     ]);
   }
 });

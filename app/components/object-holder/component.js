@@ -30,10 +30,6 @@ export default Component.extend({
     };
   }),
 
-  updateSize(size) {
-    this.set("size", size);
-  },
-
   init() {
     this._super();
     this.set("sizeDictionary", {
