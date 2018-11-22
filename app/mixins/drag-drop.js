@@ -1,16 +1,16 @@
-import Mixin from '@ember/object/mixin';
+import Mixin from "@ember/object/mixin";
 
 export default Mixin.create({
   mouseDownOverride: function() {
-    throw(new Error('Mouse down override should be overwritten by the extending class'));
+    throw (new Error("Mouse down override should be overwritten by the extending class"));
   },
 
   mouseMoveOverride: function() {
-    throw(new Error('Mouse down override should be overwritten by the extending class'));
+    throw (new Error("Mouse down override should be overwritten by the extending class"));
   },
 
   mouseUpOverride: function() {
-    throw(new Error('Mouse down override should be overwritten by the extending class'));
+    throw (new Error("Mouse down override should be overwritten by the extending class"));
   },
 
   mouseDown(event) {
@@ -19,8 +19,8 @@ export default Mixin.create({
     this.mouseMoveRef = this.mouseMoveHandler.bind(this);
     this.mouseUpRef = this.mouseUpHandler.bind(this);
 
-    window.addEventListener('mousemove', this.mouseMoveRef);
-    window.addEventListener('mouseup', this.mouseUpRef);
+    window.addEventListener("mousemove", this.mouseMoveRef);
+    window.addEventListener("mouseup", this.mouseUpRef);
 
     this.mouseDownOverride(event);
   },
@@ -34,8 +34,8 @@ export default Mixin.create({
   mouseUpHandler: function(event) {
     if (this.isMouseDown) {
       this.isMouseDown = false;
-      window.removeEventListener('mousemove', this.mouseMoveRef);
-      window.removeEventListener('mouseup', this.mouseUpRef);
+      window.removeEventListener("mousemove", this.mouseMoveRef);
+      window.removeEventListener("mouseup", this.mouseUpRef);
 
       this.mouseUpOverride(event);
     }

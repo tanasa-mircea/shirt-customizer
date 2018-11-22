@@ -3,22 +3,22 @@ import { setupRenderingTest } from "ember-qunit";
 import { render } from "@ember/test-helpers";
 import hbs from "htmlbars-inline-precompile";
 
-module("Integration | Component | color-picker", function(hooks) {
+module("Integration | Component | options-pane", function(hooks) {
   setupRenderingTest(hooks);
 
   test("it renders", async function(assert) {
     // Set any properties with this.set("myProperty", "value");
     // Handle any actions with this.set("myAction", function(val) { ... });
 
-    await render(hbs`{{color-picker}}`);
+    await render(hbs`{{options-pane}}`);
 
     assert.equal(this.element.textContent.trim(), "");
 
     // Template block usage:
     await render(hbs`
-      {{#color-picker}}
+      {{#options-pane}}
         template block text
-      {{/color-picker}}
+      {{/options-pane}}
     `);
 
     assert.equal(this.element.textContent.trim(), "template block text");

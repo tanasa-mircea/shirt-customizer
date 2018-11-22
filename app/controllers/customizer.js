@@ -1,4 +1,4 @@
-import Controller from '@ember/controller';
+import Controller from "@ember/controller";
 
 export default Controller.extend({
   init() {
@@ -6,7 +6,7 @@ export default Controller.extend({
     this.icons = [];
   },
 
-  color: '#f00',
+  color: "#f00",
   overlayDisplayed: false,
   actions: {
     optionChange(type, value) {
@@ -17,15 +17,15 @@ export default Controller.extend({
     },
 
     save() {
-      this.set('overlayDisplayed', true);
+      this.set("overlayDisplayed", true);
     },
 
     saveDrawingboardSvg(svg) {
-      this.set('svg', svg[0]);
+      this.set("svg", svg[0]);
     },
 
     svgConverted(image) {
-      this.set('imageUrl', image);
+      this.set("imageUrl", image);
     }
   }
 });

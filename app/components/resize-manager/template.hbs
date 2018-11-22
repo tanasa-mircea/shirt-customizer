@@ -1,4 +1,4 @@
-<rect class="resize-manager__border" x=0 y=0 width={{ get position 'width' }} height={{ get position 'height' }}></rect>
+<rect class="resize-manager__border" x="0" y="0" width={{ get position "width" }} height={{ get position "height" }}></rect>
 {{#each points as |point|}}
   {{ resize-point position=point move=(action "pointMove") moveEnd=(action "pointMoveEnd")}}
 {{/each}}

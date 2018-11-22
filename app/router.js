@@ -1,5 +1,5 @@
-import EmberRouter from '@ember/routing/router';
-import config from './config/environment';
+import EmberRouter from "@ember/routing/router";
+import config from "./config/environment";
 
 const Router = EmberRouter.extend({
   location: config.locationType,
@@ -7,9 +7,11 @@ const Router = EmberRouter.extend({
 });
 
 Router.map(function() {
-  this.route('customizer', {
-    path: '/customizer'
-  })
+  this.route("customizer", {
+    path: "/customizer"
+  });
+
+  return this.route;
 });
 
 export default Router;

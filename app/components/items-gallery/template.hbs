@@ -1,19 +1,13 @@
-{{#each (get options 'icons') as |icon index|}}
-  {{#if (gallerycond index page (get options 'itemsToDisplay')) }}
+{{#each (get options "icons") as |icon index|}}
+  {{#if (gallerycond index page (get options "itemsToDisplay")) }}
     <div class="items-gallery__item" style={{ galleryItemStyle }}>
-      {{#sticky-icon icon=icon as |iconData|}}
-        {{#tool-tip visible=iconData.showTooltip}}
-          <svg data-name='Layer 1' xmlns='http://www.w3.org/2000/svg' width='64' height='64' viewBox='0 0 64 64'>
-            {{ iconData.icon }}
-          </svg>
-        {{/tool-tip}}
-      {{/sticky-icon}}
+      {{ sticky-icon icon=icon }}
     </div>
   {{/if}}
 {{/each}}
 
 
 <div class="items-gallery__nav">
-  <div class="items-gallery__left" {{ action "leftClickHandler" on="click" }}></div>
-  <div class="items-gallery__right" {{ action "rightClickHandler" on="click" }}></div>
+  <button class="items-gallery__left" {{ action "leftClickHandler" on="click" }}></button>
+  <button class="items-gallery__right" {{ action "rightClickHandler" on="click" }}></button>
 </div>

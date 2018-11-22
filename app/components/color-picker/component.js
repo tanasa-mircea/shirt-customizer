@@ -1,37 +1,32 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { htmlSafe } from '@ember/template';
-
+import Component from "@ember/component";
+import { set } from "@ember/object";
 
 export default Component.extend({
-  magnifierStyle: computed('currentColor', 'magnifierPosition',  function() {
-    return new htmlSafe(`background-color: ${this.currentColor}; top: ${this.magnifierPosition.y - 25}px; left: ${this.magnifierPosition.x - 25}px`);
-  }),
-  mouseEnter() {
-    this.set('isHovered', true);
-  },
-  mouseMove() {
-    this.set('magnifierPosition', {
-      x: event.x,
-      y: event.y
-    })
-  },
-  mouseLeave() {
-    this.set('isHovered', false);
-  },
-
   init() {
     this._super();
     this.magnifierPosition = {};
   },
 
+  mouseEnter() {
+    this.set("isHovered", true);
+  },
+
+  mouseMove() {
+    set(this.magnifierPosition, "x", event.x - 25);
+    set(this.magnifierPosition, "y", event.y - 25);
+  },
+
+  mouseLeave() {
+    this.set("isHovered", false);
+  },
+
   actions: {
     colorChanged: function(color) {
-      this.optionChange('color', color);
+      this.optionChange("color", color);
     },
 
     canvasHover: function(color) {
-      this.set('currentColor', color);
+      this.set("currentColor", color);
     }
   }
 });

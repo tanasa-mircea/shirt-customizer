@@ -1,27 +1,27 @@
-import Component from '@ember/component';
-import { inject as service } from '@ember/service';
-import { computed, observer } from '@ember/object';
+import Component from "@ember/component";
+import { inject as service } from "@ember/service";
+import { computed, observer } from "@ember/object";
 
 export default Component.extend({
-  boardService: service('board'),
-  icons: computed('boardService.icons', function() {
+  boardService: service("board"),
+  icons: computed("boardService.icons", function() {
     return this.boardService.icons;
   }),
-  boardActiveIcon: computed('boardService.boardActiveIcon', function() {
+  boardActiveIcon: computed("boardService.boardActiveIcon", function() {
     return this.boardService.boardActiveIcon;
   }),
 
   selectedItem: null,
-  shirtColor: '#ccc',
-  showResize: computed('selectedItem', function() {
+  shirtColor: "#ccc",
+  showResize: computed("selectedItem", function() {
     if (this.selectedItem) {
       return true;
     }
 
-    return false
+    return false;
   }),
 
-  resizePosition: computed('selectedItem', function() {
+  resizePosition: computed("selectedItem", function() {
     if (this.selectedItem) {
       return {
         x: this.selectedItem.position.x - this.element.offsetLeft,
@@ -34,20 +34,20 @@ export default Component.extend({
     return {};
   }),
 
-  colorChanged: observer('color', function() {
+  colorChanged: observer("color", function() {
     if (this.selectedItem) {
       this.selectedItem.changeColor(this.color);
     } else {
-      this.set('shirtColor', this.color);
+      this.set("shirtColor", this.color);
     }
   }),
 
   documentClickHandler: function(event) {
-    let isIcon = event.target.closest('.board-icon, sticky-icon'),
-        isResize = event.target.closest('.resize-manager, .options-pane__option canvas, items-gallery__nav > div');
+    let isIcon = event.target.closest(".board-icon, sticky-icon"),
+        isResize = event.target.closest(".resize-manager, .options-pane__option canvas, items-gallery__nav > div");
 
     if (!isResize && !isIcon) {
-      this.set('selectedItem', null);
+      this.set("selectedItem", null);
     }
   },
 
@@ -67,24 +67,24 @@ export default Component.extend({
         icons: [],
         translateX: 425
       }
-    }
+    };
 
-    document.addEventListener('mousedown', this.documentClickHandler.bind(this));
+    document.addEventListener("mousedown", this.documentClickHandler.bind(this));
   },
 
   didInsertElement() {
-    this.set('boardOffset', {
+    this.set("boardOffset", {
       left: this.element.offsetLeft,
       top: this.element.offsetTop
-    })
+    });
 
-    let svg = this.element.getElementsByTagName('svg');
+    let svg = this.element.getElementsByTagName("svg");
     this.saveDrawingboardSvg(svg);
   },
 
   actions: {
     iconSelected: function(icon) {
-      this.set('selectedItem', icon);
+      this.set("selectedItem", icon);
     },
 
     resizeEnd: function(position) {
@@ -96,20 +96,20 @@ export default Component.extend({
         return;
       }
 
-      this.set('selectedItem', null);
-      this.set('selectedItem', icon);
+      this.set("selectedItem", null);
+      this.set("selectedItem", icon);
     },
 
     removeIcon: function(icon) {
       if (this.selectedItem === icon) {
-        this.set('selectedItem', null);
+        this.set("selectedItem", null);
       }
 
-      this.boardService.removeIcon(icon)
+      this.boardService.removeIcon(icon);
     },
 
     replaceIconParent: function(icon, newParent) {
-      let isSelected = this.selectedItem ? true : false;
+      let isSelected = Boolean(this.selectedItem);
       this.boardService.addIcon({
         parentId: newParent,
         icon: icon.icon,
@@ -121,7 +121,7 @@ export default Component.extend({
         width: icon.width,
         height: icon.height,
         selected: isSelected
-      })
+      });
     }
   }
 });

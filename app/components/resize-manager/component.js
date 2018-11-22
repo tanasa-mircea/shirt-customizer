@@ -1,44 +1,44 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
-import { htmlSafe } from '@ember/template';
+import Component from "@ember/component";
+import { computed } from "@ember/object";
+import { htmlSafe as HtmlSafe } from "@ember/template";
 
 export default Component.extend({
-  tagName: 'g',
-  classNameBindings: ['class'],
-  attributeBindings: ['style', 'transform'],
-  transform: computed('position.{x,y}', function() {
-    return `translate(${ this.position.x } ${ this.position.y })`;
+  tagName: "g",
+  classNameBindings: ["class"],
+  attributeBindings: ["style", "transform"],
+  transform: computed("position.{x,y}", function() {
+    return `translate(${this.position.x} ${this.position.y})`;
   }),
-  dimensionStyle: computed('position.{width,height}', function() {
-    return `height: ${ this.position.height }px; width: ${ this.position.width }px;`;
+  dimensionStyle: computed("position.{width,height}", function() {
+    return `height: ${this.position.height}px; width: ${this.position.width}px;`;
   }),
   pointSide: 5,
   minWidth: 25,
-  style: computed('dimensionStyle', function() {
-    return new htmlSafe(this.dimensionStyle);
+  style: computed("dimensionStyle", function() {
+    return new HtmlSafe(this.dimensionStyle);
   }),
-  class: 'resize-manager',
+  class: "resize-manager",
 
   didReceiveAttrs() {
     this.refreshPoints();
   },
 
   refreshPoints: function() {
-    this.set('points', [
+    this.set("points", [
       {
-        id: 'top-left',
+        id: "top-left",
         x: -5,
         y: -5
       }, {
-        id: 'top-right',
+        id: "top-right",
         x: this.position.width - 5,
         y: -5
       }, {
-        id: 'bottom-left',
+        id: "bottom-left",
         x: -5,
         y: this.position.height - 5
       }, {
-        id: 'bottom-right',
+        id: "bottom-right",
         x: this.position.width - 5,
         y: this.position.height - 5
       }
@@ -54,13 +54,13 @@ export default Component.extend({
       return;
     }
 
-    this.set('position.width', newWidth);
-    this.set('position.x', newX);
+    this.set("position.width", newWidth);
+    this.set("position.x", newX);
   },
 
   handleRightPoint: function(data) {
     let diffX = data.x - this.position.x - this.pointSide * 2;
-    this.set('position.width', Math.max(this.minWidth, diffX));
+    this.set("position.width", Math.max(this.minWidth, diffX));
   },
 
   handleTopPoint: function(data) {
@@ -72,41 +72,41 @@ export default Component.extend({
       return;
     }
 
-    this.set('position.height', newHeight);
-    this.set('position.y', newY);
+    this.set("position.height", newHeight);
+    this.set("position.y", newY);
   },
 
   handleBottomPoint: function(data) {
     let diffY = data.y - this.position.y - this.boardOffset.top;
-    this.set('position.height', Math.max(this.minWidth, diffY));
+    this.set("position.height", Math.max(this.minWidth, diffY));
   },
 
   actions: {
     pointMove: function(data) {
-      if (data.id.indexOf('left') >= 0) {
+      if (data.id.indexOf("left") >= 0) {
         this.handleLeftPoint(data);
       }
 
-      if (data.id.indexOf('right') >= 0) {
+      if (data.id.indexOf("right") >= 0) {
         this.handleRightPoint(data);
       }
 
-      if (data.id.indexOf('top') >= 0) {
+      if (data.id.indexOf("top") >= 0) {
         this.handleTopPoint(data);
       }
 
-      if (data.id.indexOf('bottom') >= 0) {
+      if (data.id.indexOf("bottom") >= 0) {
         this.handleBottomPoint(data);
       }
 
       let trueX = data.x,
           trueY = data.y;
 
-      if (data.id.indexOf('bottom') >= 0 && data.x  ) {
+      if (data.id.indexOf("bottom") >= 0 && data.x) {
         trueY = data.y - this.position.height;
       }
 
-      if (data.id.indexOf('right') >= 0) {
+      if (data.id.indexOf("right") >= 0) {
         trueX = data.x - this.position.width;
       }
 
@@ -117,7 +117,7 @@ export default Component.extend({
         y: trueY,
         height: this.position.height,
         width: this.position.width
-      })
+      });
     },
 
     pointMoveEnd: function() {

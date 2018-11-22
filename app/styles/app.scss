@@ -101,6 +101,11 @@ body {
     top: 50%;
     transform: translateY(-50%);
     width: 100%;
+
+    button {
+      background-color: transparent;
+      padding: 0;
+    }
   }
 
   &__left {

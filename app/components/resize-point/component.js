@@ -1,24 +1,24 @@
-import Component from '@ember/component';
-import { htmlSafe } from '@ember/template';
-import { computed } from '@ember/object';
-import DragNDropMixin from '../../mixins/drag-drop';
+import Component from "@ember/component";
+import { htmlSafe as HtmlSafe } from "@ember/template";
+import { computed } from "@ember/object";
+import DragNDropMixin from "../../mixins/drag-drop";
 
 export default Component.extend(DragNDropMixin, {
-  tagName: 'rect',
-  classNameBindings: ['class'],
-  attributeBindings: ['style', 'x', 'y'],
-  rawStyle: '',
+  tagName: "rect",
+  classNameBindings: ["class"],
+  attributeBindings: ["style", "x", "y"],
+  rawStyle: "",
   x: 0,
   y: 0,
-  style: computed('rawStyle', function() {
-    return new htmlSafe(this.rawStyle);
+  style: computed("rawStyle", function() {
+    return new HtmlSafe(this.rawStyle);
   }),
-  class: 'resize-point',
+  class: "resize-point",
 
   init() {
     this._super();
-    this.set('x', this.position.x);
-    this.set('y', this.position.y);
+    this.set("x", this.position.x);
+    this.set("y", this.position.y);
   },
 
   mouseDownOverride: function() {
@@ -37,6 +37,6 @@ export default Component.extend(DragNDropMixin, {
       x: event.x,
       y: event.y,
       id: this.position.id
-    })
-  },
+    });
+  }
 });

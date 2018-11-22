@@ -1,34 +1,33 @@
-import Component from '@ember/component';
-import { computed } from '@ember/object';
+import Component from "@ember/component";
+import { computed } from "@ember/object";
 
 
 export default Component.extend({
-  tagName: 'g',
-  classNameBindings: ['class'],
-  class: 'shirt-svg',
-  attributeBindings: ['style', 'transform', 'index:data-index'],
-  transform: computed('translateX', 'shirtSize', function() {
-    return `translate(${ this.translateX * this.shirtSize } 0)`;
+  tagName: "g",
+  classNameBindings: ["class"],
+  class: "shirt-svg",
+  attributeBindings: ["style", "transform", "index:data-index"],
+  transform: computed("translateX", "shirtSize", function() {
+    return `translate(${this.translateX * this.shirtSize} 0)`;
   }),
   size: null,
-  shirtSize: computed('size', function() {
-    console.log('size ', this.size)
+  shirtSize: computed("size", function() {
     return this.sizeDictionary[this.size];
   }),
-  shirtScale: computed('shirtSize', function() {
-    return `scale(${ this.shirtSize })`;
+  shirtScale: computed("shirtSize", function() {
+    return `scale(${this.shirtSize})`;
   }),
-  clipPathId: computed('index', function() {
+  clipPathId: computed("index", function() {
     return `objectHolder${this.index}`;
   }),
-  clipPathUrl: computed('clipPathId', function() {
+  clipPathUrl: computed("clipPathId", function() {
     return `url(#${this.clipPathId})`;
   }),
-  currentOffsets: computed('boardOffset.top', 'translateX', function() {
+  currentOffsets: computed("boardOffset.top", "translateX", function() {
     return {
       left: this.translateX,
       top: 0
-    }
+    };
   }),
 
   updateSize(size) {
@@ -37,12 +36,12 @@ export default Component.extend({
 
   init() {
     this._super();
-    this.set('sizeDictionary', {
-      "S": 0.9,
-      "M": 1,
-      "L": 1.1,
-      "XL": 1.2
-    })
+    this.set("sizeDictionary", {
+      S: 0.9,
+      M: 1,
+      L: 1.1,
+      XL: 1.2
+    });
   },
 
   actions: {

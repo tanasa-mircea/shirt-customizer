@@ -1,15 +1,15 @@
-import Component from '@ember/component';
+import Component from "@ember/component";
 
 export default Component.extend({
-  tagName: 'canvas',
+  tagName: "canvas",
   width: 255,
   height: 100,
-  style: '',
-  attributeBindings: ['height', 'width'],
+  style: "",
+  attributeBindings: ["height", "width"],
 
   didRender() {
-    this.canvas = this.get('element');
-    this.context = this.canvas.getContext('2d');
+    this.canvas = this.get("element");
+    this.context = this.canvas.getContext("2d");
 
     let hue,
         saturation = 100,
@@ -23,7 +23,7 @@ export default Component.extend({
       hue = 0;
 
       while (hue < 360) {
-        this.context.fillStyle=`hsl(${hue}, ${saturation}%, 50%)`;
+        this.context.fillStyle = `hsl(${hue}, ${saturation}%, 50%)`;
         this.context.fillRect(column, row, 1, 1);
         hue = hue + hueStep;
         column++;

@@ -1,17 +1,17 @@
-import Application from '@ember/application';
+import Application from "@ember/application";
 
-import { initialize } from 'shirt-customizer/initializers/pre-data';
-import { module, test } from 'qunit';
-import { setupTest } from 'ember-qunit';
-import { run } from '@ember/runloop';
+import { initialize } from "shirt-customizer/initializers/pre-data";
+import { module, test } from "qunit";
+import { setupTest } from "ember-qunit";
+import { run } from "@ember/runloop";
 
-module('Unit | Initializer | pre-data', function(hooks) {
+module("Unit | Initializer | pre-data", function(hooks) {
   setupTest(hooks);
 
   hooks.beforeEach(function() {
     this.TestApplication = Application.extend();
     this.TestApplication.initializer({
-      name: 'initializer under test',
+      name: "initializer under test",
       initialize
     });
 
@@ -19,11 +19,11 @@ module('Unit | Initializer | pre-data', function(hooks) {
   });
 
   hooks.afterEach(function() {
-    run(this.application, 'destroy');
+    run(this.application, "destroy");
   });
 
   // Replace this with your real tests.
-  test('it works', async function(assert) {
+  test("it works", async function(assert) {
     await this.application.boot();
 
     assert.ok(true);
