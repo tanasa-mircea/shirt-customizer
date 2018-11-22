@@ -1,5 +1,5 @@
-import Service from '@ember/service';
-import $ from 'jquery';
+import Service from "@ember/service";
+import $ from "jquery";
 
 export default Service.extend({
 
@@ -11,13 +11,13 @@ export default Service.extend({
     return new Promise(function(resolve, reject) {
       $.getJSON("/data/icons.json")
         .then(function(response) {
-          this.set('icons', response)
+          this.set("icons", response);
           resolve();
         }.bind(this))
         .catch(function(err) {
           reject(err);
-        })
-    }.bind(this))
+        });
+    }.bind(this));
   }
 
 

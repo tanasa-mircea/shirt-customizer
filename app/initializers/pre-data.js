@@ -1,6 +1,6 @@
 export function initialize(application) {
   application.deferReadiness();
-  // this.iconsService.initData()
+  application.set("defaultSize", "L");
   application.advanceReadiness();
 }
 

@@ -10,6 +10,7 @@ export default Component.extend({
   transform: computed('translateX', 'shirtSize', function() {
     return `translate(${ this.translateX * this.shirtSize } 0)`;
   }),
+  size: null,
   shirtSize: computed('size', function() {
     console.log('size ', this.size)
     return this.sizeDictionary[this.size];
@@ -29,6 +30,10 @@ export default Component.extend({
       top: 0
     }
   }),
+
+  updateSize(size) {
+    this.set("size", size);
+  },
 
   init() {
     this._super();

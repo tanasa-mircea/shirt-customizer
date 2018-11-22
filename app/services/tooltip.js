@@ -1,4 +1,4 @@
-import Service from '@ember/service';
+import Service from "@ember/service";
 
 export default Service.extend({
   visible: false,
@@ -6,18 +6,18 @@ export default Service.extend({
   content: null,
 
   show: function() {
-    this.set('visible', true);
+    this.set("visible", true);
   },
 
   hide: function() {
-    this.set('visible', false);
+    this.set("visible", false);
   },
 
   updatePosition: function(position) {
-    this.set('position', position);
+    this.set("position", position);
   },
 
   updateContent: function(content) {
-    this.set('content', content);
+    this.set("content", content);
   }
 });
