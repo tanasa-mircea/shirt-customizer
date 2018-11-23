@@ -57,6 +57,7 @@ export default Component.extend(DragNDropMixin, {
       this.cloneElement = this.element.cloneNode(true);
 
       let board = this.element.closest(".drawing-board");
+
       board.appendChild(this.cloneElement);
     }
 
@@ -70,8 +71,8 @@ export default Component.extend(DragNDropMixin, {
 
     this.cloneElement.classList.add("icon-clone");
     this.cloneElement.style.transform = `translate(
-                                          ${(event.x - this.boardOffset.left - this.mouseDownPosition.insideX)}px,
-                                          ${(event.y - this.boardOffset.top - this.mouseDownPosition.insideY)}px)`;
+                                          ${(event.x - this.boardOffset.left * this.parentScale - this.mouseDownPosition.insideX)}px,
+                                          ${(event.y - this.boardOffset.top * this.parentScale - this.mouseDownPosition.insideY)}px) scale(${this.parentScale})`;
   },
 
   mouseUpOverride: function(event) {
@@ -109,7 +110,7 @@ export default Component.extend(DragNDropMixin, {
   updatePosition: function(position) {
     this.set("width", position.width);
     this.set("height", position.height);
-    this.set("position.x", position.x);
-    this.set("position.y", position.y);
+    this.set("position.x", position.x / this.parentScale);
+    this.set("position.y", position.y / this.parentScale);
   }
 });

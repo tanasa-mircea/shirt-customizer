@@ -30,10 +30,10 @@ export default Component.extend({
   resizePosition: computed("selectedItem", function() {
     if (this.selectedItem) {
       return {
-        x: this.selectedItem.position.x * this.intSize - this.element.offsetLeft,
-        y: this.selectedItem.position.y * this.intSize - this.element.offsetTop,
-        width: this.selectedItem.width,
-        height: this.selectedItem.height
+        x: this.selectedItem.position.x * this.intSize - this.element.offsetLeft * this.intSize,
+        y: this.selectedItem.position.y * this.intSize - this.element.offsetTop * this.intSize,
+        width: this.selectedItem.width * this.intSize,
+        height: this.selectedItem.height * this.intSize
       };
     }
 
