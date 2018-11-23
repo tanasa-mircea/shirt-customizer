@@ -1,5 +1,5 @@
 import Component from "@ember/component";
-import { computed, observer } from "@ember/object";
+import { computed } from "@ember/object";
 import { htmlSafe as HtmlSafe } from "@ember/template";
 import { inject as service } from "@ember/service";
 import DragNDropMixin from "../../mixins/drag-drop";
@@ -8,14 +8,9 @@ export default Component.extend(DragNDropMixin, {
   tagName: "g",
   classNameBindings: ["class", "invisible"],
   attributeBindings: ["style", "positionStyle:transform"],
-  scaleChanged: observer("parentScale", function() {
-
-    // set(this.position, "x", this.position.x * this.parentScale);
-    // set(this.position, "y", this.position.y * this.parentScale);
-  }),
   positionStyle: computed("position.{x,y}", function() {
-    return `translate(${(this.position.x - this.parentOffset.left - this.boardOffset.left) * (this.parentScale)},
-                      ${(this.position.y - this.parentOffset.top  - this.boardOffset.top) * (this.parentScale)})`;
+    return `translate(${(this.position.x - this.parentOffset.left - this.boardOffset.left)},
+                      ${(this.position.y  - this.parentOffset.top - this.boardOffset.top)})`;
   }),
   dimensionStyle: computed("height", "width", function() {
     return `height: ${this.height}px; width: ${this.width}px`;
@@ -39,14 +34,15 @@ export default Component.extend(DragNDropMixin, {
       this.selected(this);
     }
   },
+
   mouseDownOverride: function (event) {
     // Workaround Chrome trigger mousemove at mousedown sometimes
     // https://bugs.chromium.org/p/chromium/issues/detail?id=721341
     this.mouseDownPosition = {
       x: event.pageX,
       y: event.pageY,
-      insideX: event.pageX - this.position.x,
-      insideY: event.pageY - this.position.y
+      insideX: event.pageX - this.position.x * this.parentScale,
+      insideY: event.pageY - this.position.y * this.parentScale
     };
   },
 
@@ -68,8 +64,8 @@ export default Component.extend(DragNDropMixin, {
       this.set("hasMoved", true);
     }
 
-    this.set("position.x", event.x - this.mouseDownPosition.insideX);
-    this.set("position.y", event.y - this.mouseDownPosition.insideY);
+    this.set("position.x", (event.x - this.mouseDownPosition.insideX) / this.parentScale);
+    this.set("position.y", (event.y - this.mouseDownPosition.insideY) / this.parentScale);
     this.move(this);
 
     this.cloneElement.classList.add("icon-clone");
@@ -86,8 +82,8 @@ export default Component.extend(DragNDropMixin, {
     }
 
     this.set("invisible", false);
-    this.set("position.x", event.x - this.mouseDownPosition.insideX);
-    this.set("position.y", event.y - this.mouseDownPosition.insideY);
+    this.set("position.x", (event.x - this.mouseDownPosition.insideX) / this.parentScale);
+    this.set("position.y", (event.y - this.mouseDownPosition.insideY) / this.parentScale);
     this.set("hasMoved", false);
 
     let shirtParent = event.target.closest(".shirt-svg");

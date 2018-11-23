@@ -30,8 +30,8 @@ export default Component.extend({
   resizePosition: computed("selectedItem", function() {
     if (this.selectedItem) {
       return {
-        x: this.selectedItem.position.x - this.element.offsetLeft,
-        y: this.selectedItem.position.y - this.element.offsetTop,
+        x: this.selectedItem.position.x * this.intSize - this.element.offsetLeft,
+        y: this.selectedItem.position.y * this.intSize - this.element.offsetTop,
         width: this.selectedItem.width,
         height: this.selectedItem.height
       };
@@ -43,8 +43,8 @@ export default Component.extend({
   newIconDropped: observer("newIcon", function() {
     if (this.newIcon) {
       let newIcon = Object.assign({}, this.newIcon);
-      set(newIcon.position, "x", newIcon.position.x * (2 - this.intSize));
-      set(newIcon.position, "y", newIcon.position.y * (2 - this.intSize));
+      set(newIcon.position, "x", newIcon.position.x / this.intSize);
+      set(newIcon.position, "y", newIcon.position.y  / this.intSize);
       this.boardService.addIcon(newIcon);
     }
   }),
