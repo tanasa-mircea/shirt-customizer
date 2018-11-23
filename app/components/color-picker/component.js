@@ -2,6 +2,9 @@ import Component from "@ember/component";
 import { set } from "@ember/object";
 
 export default Component.extend({
+  classNameBindings: ["class"],
+  class: "color-picker",
+
   init() {
     this._super();
     this.magnifierPosition = {};

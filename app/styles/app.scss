@@ -35,13 +35,7 @@ body {
 }
 
 .color-picker {
-  &__matrix {
-    width: 100%;
-  }
-
-  &__row {
-    display: flex;
-  }
+  display: inline-block;
 
   &__magnifier {
     border-radius: 50%;
