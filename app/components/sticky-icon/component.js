@@ -67,7 +67,7 @@ export default Component.extend(DragNDropMixin, {
 
     let shirtParent = event.target.closest(".shirt-svg");
     if (shirtParent) {
-      this.boardService.addIcon({
+      this.dropped({
         parentId: shirtParent.dataset.index,
         icon: this.icon,
         color: "#000",

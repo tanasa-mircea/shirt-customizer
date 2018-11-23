@@ -1,17 +1,21 @@
 import Component from "@ember/component";
-import { computed } from "@ember/object";
+import { computed, observer } from "@ember/object";
 import { htmlSafe as HtmlSafe } from "@ember/template";
 import { inject as service } from "@ember/service";
 import DragNDropMixin from "../../mixins/drag-drop";
-
 
 export default Component.extend(DragNDropMixin, {
   tagName: "g",
   classNameBindings: ["class", "invisible"],
   attributeBindings: ["style", "positionStyle:transform"],
+  scaleChanged: observer("parentScale", function() {
+
+    // set(this.position, "x", this.position.x * this.parentScale);
+    // set(this.position, "y", this.position.y * this.parentScale);
+  }),
   positionStyle: computed("position.{x,y}", function() {
-    return `translate(${this.position.x - this.parentOffset.left - this.boardOffset.left},
-                      ${this.position.y - this.parentOffset.top - this.boardOffset.top})`;
+    return `translate(${(this.position.x - this.parentOffset.left - this.boardOffset.left) * (this.parentScale)},
+                      ${(this.position.y - this.parentOffset.top  - this.boardOffset.top) * (this.parentScale)})`;
   }),
   dimensionStyle: computed("height", "width", function() {
     return `height: ${this.height}px; width: ${this.width}px`;
@@ -35,7 +39,6 @@ export default Component.extend(DragNDropMixin, {
       this.selected(this);
     }
   },
-
   mouseDownOverride: function (event) {
     // Workaround Chrome trigger mousemove at mousedown sometimes
     // https://bugs.chromium.org/p/chromium/issues/detail?id=721341

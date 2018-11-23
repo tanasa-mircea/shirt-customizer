@@ -22,6 +22,10 @@ export default Component.extend({
 
     rightClickHandler: function() {
       this.incrementProperty("page");
+    },
+
+    iconDropped: function(icon) {
+      this.optionChange("icon", icon);
     }
   }
 });

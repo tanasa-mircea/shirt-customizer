@@ -7,15 +7,12 @@ export default Component.extend({
   classNameBindings: ["class"],
   class: "shirt-svg",
   attributeBindings: ["style", "transform", "index:data-index"],
-  transform: computed("translateX", "shirtSize", function() {
-    return `translate(${this.translateX * this.shirtSize} 0)`;
+  transform: computed("translateX", "size", function() {
+    return `translate(${this.translateX * this.size} 0)`;
   }),
   size: null,
-  shirtSize: computed("size", function() {
-    return this.sizeDictionary[this.size];
-  }),
-  shirtScale: computed("shirtSize", function() {
-    return `scale(${this.shirtSize})`;
+  shirtScale: computed("size", function() {
+    return `scale(${this.size})`;
   }),
   clipPathId: computed("index", function() {
     return `objectHolder${this.index}`;
@@ -29,16 +26,6 @@ export default Component.extend({
       top: 0
     };
   }),
-
-  init() {
-    this._super();
-    this.set("sizeDictionary", {
-      S: 0.9,
-      M: 1,
-      L: 1.1,
-      XL: 1.2
-    });
-  },
 
   actions: {
     iconMove: function(icon) {

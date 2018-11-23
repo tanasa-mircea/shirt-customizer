@@ -3,7 +3,6 @@ import { set } from "@ember/object";
 
 export default Service.extend({
   icons: null,
-  boardActiveIcon: null,
 
   addIcon: function(icon) {
     let newIcon = icon;

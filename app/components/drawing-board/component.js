@@ -1,6 +1,6 @@
 import Component from "@ember/component";
 import { inject as service } from "@ember/service";
-import { computed, observer } from "@ember/object";
+import { computed, observer, set } from "@ember/object";
 
 export default Component.extend({
   boardService: service("board"),
@@ -10,7 +10,13 @@ export default Component.extend({
   boardActiveIcon: computed("boardService.boardActiveIcon", function() {
     return this.boardService.boardActiveIcon;
   }),
+  intSize: computed("size", function() {
+    if (!this.size) {
+      return 1;
+    }
 
+    return this.sizeDictionary[this.size];
+  }),
   selectedItem: null,
   shirtColor: "#ccc",
   showResize: computed("selectedItem", function() {
@@ -32,6 +38,15 @@ export default Component.extend({
     }
 
     return {};
+  }),
+
+  newIconDropped: observer("newIcon", function() {
+    if (this.newIcon) {
+      let newIcon = Object.assign({}, this.newIcon);
+      set(newIcon.position, "x", newIcon.position.x * (2 - this.intSize));
+      set(newIcon.position, "y", newIcon.position.y * (2 - this.intSize));
+      this.boardService.addIcon(newIcon);
+    }
   }),
 
   colorChanged: observer("color", function() {
@@ -68,6 +83,13 @@ export default Component.extend({
         translateX: 425
       }
     };
+
+    this.set("sizeDictionary", {
+      S: 0.9,
+      M: 1,
+      L: 1.1,
+      XL: 1.2
+    });
 
     document.addEventListener("mousedown", this.documentClickHandler.bind(this));
   },

@@ -1,7 +1,7 @@
 {{#each (get options "icons") as |icon index|}}
   {{#if (gallerycond index page (get options "itemsToDisplay")) }}
     <div class="items-gallery__item" style={{ galleryItemStyle }}>
-      {{ sticky-icon icon=icon }}
+      {{ sticky-icon icon=icon dropped=(action "iconDropped") }}
     </div>
   {{/if}}
 {{/each}}

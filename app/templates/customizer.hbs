@@ -1,7 +1,7 @@
 <h1>Shirt Customizer</h1>
 
 <div class="main-wrapper">
-  {{ drawing-board color=color size=size shirtSvgs=model.[0] saveDrawingboardSvg=(action "saveDrawingboardSvg") }}
+  {{ drawing-board color=color size=size shirtSvgs=model.[0] saveDrawingboardSvg=(action "saveDrawingboardSvg") newIcon=icon}}
   {{ options-pane optionChange=(action "optionChange") options=model.[1].options }}
 </div>
 
