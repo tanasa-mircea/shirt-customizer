@@ -13,7 +13,8 @@ export default Controller.extend({
       this.set(type, value);
     },
 
-    iconAdded() {
+    closeOverlay() {
+      this.set("overlayDisplayed", false);
     },
 
     save() {

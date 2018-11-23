@@ -10,6 +10,7 @@
 
 {{#if overlayDisplayed}}
   <div class="overlay">
+    <button class="close-button" {{ action "closeOverlay" }}></button>
     {{ image-display svg=svg svgConverted=(action "svgConverted") }}
     <img src={{imageUrl}} alt="">
   </div>
