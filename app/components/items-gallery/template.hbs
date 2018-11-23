@@ -6,8 +6,7 @@
   {{/if}}
 {{/each}}
 
-
 <div class="items-gallery__nav">
-  <button class="items-gallery__left" {{ action "leftClickHandler" on="click" }}></button>
-  <button class="items-gallery__right" {{ action "rightClickHandler" on="click" }}></button>
+  <button class="items-gallery__left" {{ action "leftClickHandler" on="click" }} disabled={{leftDisabled}}></button>
+  <button class="items-gallery__right" {{ action "rightClickHandler" on="click" }}  disabled={{rightDisabled}}></button>
 </div>
