@@ -13,6 +13,7 @@ export default Component.extend({
     return `height: ${this.position.height}px; width: ${this.position.width}px;`;
   }),
   minWidth: 25,
+  minHeight: 25,
   style: computed("dimensionStyle", function() {
     return new HtmlSafe(this.dimensionStyle);
   }),
@@ -67,7 +68,7 @@ export default Component.extend({
     newHeight = diffY + this.position.height,
     newY = this.position.y - diffY;
 
-    if (newHeight < this.minWidth) {
+    if (newHeight < this.minHeight) {
       return;
     }
 
@@ -77,7 +78,7 @@ export default Component.extend({
 
   handleBottomPoint: function(data) {
     let diffY = data.y - this.position.y - this.boardOffset.top;
-    this.set("position.height", Math.max(this.minWidth, diffY));
+    this.set("position.height", Math.max(this.minHeight, diffY));
   },
 
   actions: {
@@ -98,22 +99,11 @@ export default Component.extend({
         this.handleBottomPoint(data);
       }
 
-      let trueX = data.x,
-          trueY = data.y;
-
-      if (data.id.indexOf("bottom") >= 0 && data.x) {
-        trueY = data.y - this.position.height;
-      }
-
-      if (data.id.indexOf("right") >= 0) {
-        trueX = data.x - this.position.width;
-      }
-
       this.refreshPoints();
 
       this.resizeEnd({
-        x: trueX,
-        y: trueY,
+        x: this.position.x + this.boardOffset.left,
+        y: this.position.y + this.boardOffset.top,
         height: this.position.height,
         width: this.position.width
       });
