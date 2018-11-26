@@ -12,7 +12,6 @@ export default Component.extend({
   dimensionStyle: computed("position.{width,height}", function() {
     return `height: ${this.position.height}px; width: ${this.position.width}px;`;
   }),
-  pointSide: 5,
   minWidth: 25,
   style: computed("dimensionStyle", function() {
     return new HtmlSafe(this.dimensionStyle);
@@ -46,7 +45,7 @@ export default Component.extend({
   },
 
   handleLeftPoint: function(data) {
-    let diffX = this.position.x - data.x + this.pointSide * 2,
+    let diffX = this.position.x - data.x,
         newWidth = diffX + this.position.width,
         newX = this.position.x - diffX;
 
@@ -59,7 +58,7 @@ export default Component.extend({
   },
 
   handleRightPoint: function(data) {
-    let diffX = data.x - this.position.x - this.pointSide * 2;
+    let diffX = data.x - this.position.x;
     this.set("position.width", Math.max(this.minWidth, diffX));
   },
 
