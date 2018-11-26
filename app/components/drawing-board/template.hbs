@@ -14,8 +14,8 @@
       removeIcon=(action "removeIcon")
     }}
   {{/each-in}}
-
-  {{#if showResize}}
-    {{ resize-manager position=resizePosition boardOffset=boardOffset resizeEnd=(action "resizeEnd") }}
-  {{/if}}
 </svg>
+
+{{#if showResize}}
+  {{ resize-manager position=resizePosition boardOffset=boardOffset resizeEnd=(action "resizeEnd") }}
+{{/if}}
