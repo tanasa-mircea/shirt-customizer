@@ -71,8 +71,9 @@ export default Component.extend(DragNDropMixin, {
 
     this.cloneElement.classList.add("icon-clone");
     this.cloneElement.style.transform = `translate(
-                                          ${(event.x - this.boardOffset.left * this.parentScale - this.mouseDownPosition.insideX)}px,
-                                          ${(event.y - this.boardOffset.top * this.parentScale - this.mouseDownPosition.insideY)}px) scale(${this.parentScale})`;
+                            ${(event.x - this.boardOffset.left * this.parentScale - this.mouseDownPosition.insideX)}px,
+                            ${(event.y - this.boardOffset.top * this.parentScale - this.mouseDownPosition.insideY)}px)
+                            scale(${this.parentScale})`;
   },
 
   mouseUpOverride: function(event) {

@@ -4,6 +4,9 @@ import { computed, observer, set } from "@ember/object";
 
 export default Component.extend({
   boardService: service("board"),
+  classNameBindings: ["class"],
+  tagName: "svg",
+  class: "drawing-board",
   icons: computed("boardService.icons", function() {
     return this.boardService.icons;
   }),
@@ -27,11 +30,21 @@ export default Component.extend({
     return false;
   }),
 
+  svgWidth: computed("intSize", function() {
+    return this.intSize * (400 + 85);
+  }),
+
+  svgHeight: computed("intSize", function() {
+    return this.intSize * 195;
+  }),
+
   resizePosition: computed("selectedItem", function() {
     if (this.selectedItem) {
+      let drawingBoardClientRect = this.element.getBoundingClientRect();
+
       return {
-        x: this.selectedItem.position.x * this.intSize - this.element.offsetLeft * this.intSize,
-        y: this.selectedItem.position.y * this.intSize - this.element.offsetTop * this.intSize,
+        x: this.selectedItem.position.x * this.intSize - drawingBoardClientRect.left * this.intSize,
+        y: this.selectedItem.position.y * this.intSize - drawingBoardClientRect.top * this.intSize,
         width: this.selectedItem.width * this.intSize,
         height: this.selectedItem.height * this.intSize
       };
@@ -72,15 +85,15 @@ export default Component.extend({
     this.shirts = {
       front: {
         icons: [],
-        translateX: 25
+        translateX: 0
       },
       back: {
         icons: [],
-        translateX: 225
+        translateX: 200
       },
       side: {
         icons: [],
-        translateX: 425
+        translateX: 400
       }
     };
 
@@ -95,9 +108,10 @@ export default Component.extend({
   },
 
   didInsertElement() {
+    let drawingBoardClientRect = this.element.getBoundingClientRect();
     this.set("boardOffset", {
-      left: this.element.offsetLeft,
-      top: this.element.offsetTop
+      left: drawingBoardClientRect.left,
+      top: drawingBoardClientRect.top
     });
 
     let svg = this.element.getElementsByTagName("svg");

@@ -5,11 +5,14 @@ export default Component.extend({
   width: 255,
   height: 100,
   imageUrl: null,
+
   attributeBindings: ["height", "width"],
   didInsertElement() {
-    let svgStrigified = new XMLSerializer().serializeToString(this.svg);
-    this.set("height", this.svg.clientHeight);
-    this.set("width", this.svg.clientWidth);
+    let svgStrigified = new XMLSerializer().serializeToString(this.svg),
+        svgBBox = this.svg.getBBox();
+
+    this.set("height", svgBBox.height + 2);
+    this.set("width", svgBBox.width + 2);
     let canvasContext = this.element.getContext("2d");
     var DOMURL = self.URL || self.webkitURL || self;
     var img = new Image();

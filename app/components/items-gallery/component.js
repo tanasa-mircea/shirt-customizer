@@ -5,11 +5,11 @@ import { computed } from "@ember/object";
 
 export default Component.extend({
   classNameBindings: ["class"],
+  class: "items-gallery",
   page: 1,
   itemsOnPage: 20,
 
   willRender() {
-    this.set("class", "items-gallery");
     this.set("galleryItemStyle", new HtmlSafe("width: " + 10 + "%;"));
   },
 
