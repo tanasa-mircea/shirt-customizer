@@ -13,16 +13,16 @@ export default Service.extend({
   initialize: function() {
     this.set("defaultPositions", [{
       position: "top",
-      offset: 40
+      offset: 20
     }, {
       position: "bottom",
-      offset: 40
+      offset: 20
     }, {
       position: "right",
-      offset: 40
+      offset: 20
     }, {
       position: "left",
-      offset: 40
+      offset: 20
     }]);
   },
 

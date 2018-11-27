@@ -86,11 +86,11 @@ export default Component.extend({
 
   horizontalPositionCompute: function(data) {
     const boundingRect = data.target.getBoundingClientRect();
-    const positionY = boundingRect.y + (boundingRect.height / 2);
+    const positionY = boundingRect.y - (boundingRect.height / 2);
     let positionX;
 
     if (data.before) {
-      positionX = boundingRect.x - this.element.clientWidth;
+      positionX = boundingRect.x - this.element.clientWidth - data.offset;
 
       if (positionX < 0) {
         return false;
@@ -99,7 +99,7 @@ export default Component.extend({
       return [positionX, positionY];
     }
 
-    positionX = boundingRect.x + boundingRect.width;
+    positionX = boundingRect.x + boundingRect.width + data.offset;
 
     if ((positionX + this.element.clientWidth) > window.innerWidth) {
       return false;

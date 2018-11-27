@@ -23,7 +23,6 @@ export default Component.extend(DragNDropMixin, {
   showTooltip: false,
   class: "sticky-icon",
   iconsService: service("icons"),
-  boardService: service("board"),
   tooltipService: service("tooltip"),
   sanitizedIcon: computed("icon", function() {
     return new HtmlSafe(this.iconsService.get(this.icon));
