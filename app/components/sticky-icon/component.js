@@ -30,19 +30,17 @@ export default Component.extend(DragNDropMixin, {
   }),
 
   mouseEnter() {
-    let boundingClientRect = this.element.getBoundingClientRect();
-    this.tooltipService.updatePosition({
-      x: boundingClientRect.x + boundingClientRect.width,
-      y: boundingClientRect.y + boundingClientRect.height,
-      minX: boundingClientRect.x,
-      minY: boundingClientRect.y
-    });
+    let tooltipOptions = {
+      target: this.element,
+      content: {
+        component: "tooltip-icon",
+        componentOptions: {
+          icon: this.icon
+        }
+      }
+    };
 
-    this.tooltipService.updateContent({
-      type: "svg",
-      body: this.sanitizedIcon
-    });
-    this.tooltipService.show();
+    this.tooltipService.show(tooltipOptions);
   },
 
   mouseLeave() {

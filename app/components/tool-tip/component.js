@@ -3,8 +3,7 @@ import {
   inject as service
 } from "@ember/service";
 import {
-  computed,
-  observer
+  computed
 } from "@ember/object";
 import {
   htmlSafe as HtmlSafe
@@ -15,47 +14,97 @@ export default Component.extend({
   classNameBindings: ["classes", "visible"],
   attributeBindings: ["style"],
   tooltipService: service("tooltip"),
-  visibleObserve: observer("tooltipService.visible", function() {
-    this.set("visible", this.tooltipService.visible);
+  options: null,
+  positionsConfig: null,
+  position: computed("options.{positions,target}", function() {
+    if (!this.options) {
+      return [0, 0];
+    }
+
+    let computedPosition;
+
+    for (let i = 0; i < this.options.positions.length; i++) {
+      const positionData = this.options.positions[i];
+      const currentConfig = this.positionsConfig[positionData.position];
+
+      computedPosition = currentConfig.canShow.call(this, {
+        target: this.options.target,
+        offset: positionData.offset,
+        before: currentConfig.before
+      });
+
+      if (computedPosition) {
+        break;
+      }
+    }
+
+    return computedPosition;
+  }),
+  style: computed("position", function() {
+    return new HtmlSafe(`left: ${this.position[0]}px; top: ${this.position[1]}px;`);
   }),
 
-  positionTop: computed("tooltipService.position.y", function() {
-    if (!this.tooltipService.position) {
-      return "";
+  init(...args) {
+    this._super(args);
+    this.initialize();
+  },
+
+  initialize: function() {
+    this.tooltipService.setCurrentTooltip(this);
+    this.set("positionsConfig", {
+      top: {
+        canShow: this.verticalPositionCompute,
+        before: true
+      },
+      bottom: {
+        canShow: this.verticalPositionCompute,
+        before: false
+      },
+      left: {
+        canShow: this.horizontalPositionCompute,
+        before: true
+      },
+      right: {
+        canShow: this.horizontalPositionCompute,
+        before: false
+      }
+    });
+  },
+
+  show: function(options) {
+    this.set("options", options);
+    this.set("visible", true);
+  },
+
+  hide: function() {
+    this.set("visible", false);
+  },
+
+  verticalPositionCompute: function() {
+    return false;
+  },
+
+  horizontalPositionCompute: function(data) {
+    const boundingRect = data.target.getBoundingClientRect();
+    const positionY = boundingRect.y + (boundingRect.height / 2);
+    let positionX;
+
+    if (data.before) {
+      positionX = boundingRect.x - this.element.clientWidth;
+
+      if (positionX < 0) {
+        return false;
+      }
+
+      return [positionX, positionY];
     }
 
-    let tooltipTop = this.tooltipService.position.y;
+    positionX = boundingRect.x + boundingRect.width;
 
-    if (tooltipTop + this.element.clientHeight > window.innerHeight) {
-      tooltipTop = this.tooltipService.position.minY;
+    if ((positionX + this.element.clientWidth) > window.innerWidth) {
+      return false;
     }
 
-    return `top: ${tooltipTop}px;`;
-  }),
-
-  positionLeft: computed("tooltipService.position.x", function() {
-    if (!this.tooltipService.position) {
-      return "";
-    }
-
-    let tooltipLeft = this.tooltipService.position.x;
-
-    if (tooltipLeft + this.element.clientWidth > window.innerWidth) {
-      return `right: ${window.innerWidth - this.tooltipService.position.minX}px`;
-    }
-
-    return `left: ${tooltipLeft}px;`;
-  }),
-
-  style: computed("positionTop", "positionLeft", function() {
-    return new HtmlSafe(this.positionTop + this.positionLeft);
-  }),
-
-  sanitizedContent: computed("tooltipService.content.{type,body}", function() {
-    if (!this.tooltipService.content) {
-      return "";
-    }
-
-    return new HtmlSafe(this.tooltipService.content.body);
-  })
+    return [positionX, positionY];
+  }
 });
