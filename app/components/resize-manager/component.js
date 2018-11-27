@@ -1,6 +1,10 @@
 import Component from "@ember/component";
-import { computed } from "@ember/object";
-import { htmlSafe as HtmlSafe } from "@ember/template";
+import {
+  computed
+} from "@ember/object";
+import {
+  htmlSafe as HtmlSafe
+} from "@ember/template";
 
 export default Component.extend({
   tagName: "g",
@@ -24,31 +28,29 @@ export default Component.extend({
   },
 
   refreshPoints: function() {
-    this.set("points", [
-      {
-        id: "top-left",
-        x: -5,
-        y: -5
-      }, {
-        id: "top-right",
-        x: this.position.width - 5,
-        y: -5
-      }, {
-        id: "bottom-left",
-        x: -5,
-        y: this.position.height - 5
-      }, {
-        id: "bottom-right",
-        x: this.position.width - 5,
-        y: this.position.height - 5
-      }
-    ]);
+    this.set("points", [{
+      id: "top-left",
+      x: -5,
+      y: -5
+    }, {
+      id: "top-right",
+      x: this.position.width - 5,
+      y: -5
+    }, {
+      id: "bottom-left",
+      x: -5,
+      y: this.position.height - 5
+    }, {
+      id: "bottom-right",
+      x: this.position.width - 5,
+      y: this.position.height - 5
+    }]);
   },
 
   handleLeftPoint: function(data) {
     let diffX = this.position.x - data.x,
-        newWidth = diffX + this.position.width,
-        newX = this.position.x - diffX;
+      newWidth = diffX + this.position.width,
+      newX = this.position.x - diffX;
 
     if (newWidth < this.minWidth) {
       return;
@@ -65,8 +67,8 @@ export default Component.extend({
 
   handleTopPoint: function(data) {
     let diffY = this.position.y - data.y + this.boardOffset.top,
-    newHeight = diffY + this.position.height,
-    newY = this.position.y - diffY;
+      newHeight = diffY + this.position.height,
+      newY = this.position.y - diffY;
 
     if (newHeight < this.minHeight) {
       return;
@@ -109,7 +111,6 @@ export default Component.extend({
       });
     },
 
-    pointMoveEnd: function() {
-    }
+    pointMoveEnd: function() {}
   }
 });

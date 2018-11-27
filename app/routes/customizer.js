@@ -1,5 +1,7 @@
 import Route from "@ember/routing/route";
-import { inject as service } from "@ember/service";
+import {
+  inject as service
+} from "@ember/service";
 import $ from "jquery";
 
 export default Route.extend({

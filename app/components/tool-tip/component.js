@@ -1,7 +1,14 @@
 import Component from "@ember/component";
-import { inject as service } from "@ember/service";
-import { computed, observer } from "@ember/object";
-import { htmlSafe as HtmlSafe } from "@ember/template";
+import {
+  inject as service
+} from "@ember/service";
+import {
+  computed,
+  observer
+} from "@ember/object";
+import {
+  htmlSafe as HtmlSafe
+} from "@ember/template";
 
 export default Component.extend({
   classes: "tooltip",

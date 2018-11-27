@@ -14,14 +14,13 @@ export default Component.extend({
 
   drawCanvas: function() {
     let saturation = 100,
-        row = 0,
-        hueStep = 360 / this.width,
-        saturationStep = 100 / this.height;
+      row = 0,
+      hueStep = 360 / this.width,
+      saturationStep = 100 / this.height;
 
     while (saturation > 0) {
       let column = 0,
-          hue = 0;
-
+        hue = 0;
 
       while (hue < 360) {
         this.context.fillStyle = `hsl(${hue}, ${saturation}%, 50%)`;
@@ -45,7 +44,7 @@ export default Component.extend({
     this.change(this.toRgb(color));
   },
 
-  mouseMove () {
+  mouseMove() {
     let color = this.context.getImageData(event.offsetX, event.offsetY, 1, 1).data;
     this.hover(this.toRgb(color));
   }

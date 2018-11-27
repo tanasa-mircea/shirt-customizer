@@ -1,5 +1,7 @@
 import Component from "@ember/component";
-import { set } from "@ember/object";
+import {
+  set
+} from "@ember/object";
 
 const magnifierOffset = 25;
 

@@ -1,6 +1,12 @@
 import Component from "@ember/component";
-import { inject as service } from "@ember/service";
-import { computed, observer, set } from "@ember/object";
+import {
+  inject as service
+} from "@ember/service";
+import {
+  computed,
+  observer,
+  set
+} from "@ember/object";
 
 export default Component.extend({
   boardService: service("board"),
@@ -57,7 +63,7 @@ export default Component.extend({
     if (this.newIcon) {
       let newIcon = Object.assign({}, this.newIcon);
       set(newIcon.position, "x", newIcon.position.x / this.intSize);
-      set(newIcon.position, "y", newIcon.position.y  / this.intSize);
+      set(newIcon.position, "y", newIcon.position.y / this.intSize);
       this.boardService.addIcon(newIcon);
     }
   }),
@@ -72,7 +78,7 @@ export default Component.extend({
 
   documentClickHandler: function(event) {
     let isIcon = event.target.closest(".board-icon, sticky-icon"),
-        isResize = event.target.closest(".resize-manager, .options-pane__option canvas, items-gallery__nav > div");
+      isResize = event.target.closest(".resize-manager, .options-pane__option canvas, items-gallery__nav > div");
 
     if (!isResize && !isIcon) {
       this.set("selectedItem", null);

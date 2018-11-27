@@ -1,5 +1,7 @@
 import Service from "@ember/service";
-import { set } from "@ember/object";
+import {
+  set
+} from "@ember/object";
 
 export default Service.extend({
   icons: null,
@@ -35,10 +37,10 @@ export default Service.extend({
 
     for (let i = 0; i < typesArray.length; i++) {
       let newIconsArray = this.icons[typesArray[i]]
-                            .map(function(icon, index) {
-                              set(icon, "currentIndex", index);
-                              return icon;
-                            });
+        .map(function(icon, index) {
+          set(icon, "currentIndex", index);
+          return icon;
+        });
 
       set(this.icons, typesArray[i], newIconsArray);
     }

@@ -1,7 +1,13 @@
 import Component from "@ember/component";
-import { computed } from "@ember/object";
-import { htmlSafe as HtmlSafe } from "@ember/template";
-import { inject as service } from "@ember/service";
+import {
+  computed
+} from "@ember/object";
+import {
+  htmlSafe as HtmlSafe
+} from "@ember/template";
+import {
+  inject as service
+} from "@ember/service";
 import DragNDropMixin from "../../mixins/drag-drop";
 
 export default Component.extend(DragNDropMixin, {
@@ -50,8 +56,8 @@ export default Component.extend(DragNDropMixin, {
     this.set("originCoords", {
       x: elementBoundingClient.x,
       y: elementBoundingClient.y,
-      insideX : event.pageX - elementBoundingClient.x,
-      insideY : event.pageY - elementBoundingClient.y
+      insideX: event.pageX - elementBoundingClient.x,
+      insideY: event.pageY - elementBoundingClient.y
     });
   },
 

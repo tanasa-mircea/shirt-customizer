@@ -1,6 +1,10 @@
 import Component from "@ember/component";
-import { computed } from "@ember/object";
-import { htmlSafe as HtmlSafe } from "@ember/template";
+import {
+  computed
+} from "@ember/object";
+import {
+  htmlSafe as HtmlSafe
+} from "@ember/template";
 
 export default Component.extend({
   classNameBindings: ["class"],

@@ -9,14 +9,16 @@ export default Component.extend({
   attributeBindings: ["height", "width"],
   didInsertElement() {
     let svgStrigified = new XMLSerializer().serializeToString(this.svg),
-        svgBBox = this.svg.getBBox();
+      svgBBox = this.svg.getBBox();
 
     this.set("height", svgBBox.height + 2);
     this.set("width", svgBBox.width + 2);
     let canvasContext = this.element.getContext("2d");
     var DOMURL = self.URL || self.webkitURL || self;
     var img = new Image();
-    var svg = new Blob([svgStrigified], { type: "image/svg+xml;charset=utf-8" });
+    var svg = new Blob([svgStrigified], {
+      type: "image/svg+xml;charset=utf-8"
+    });
     var url = DOMURL.createObjectURL(svg);
 
     img.onload = function() {
