@@ -24,7 +24,6 @@ export default Component.extend(DragNDropMixin, {
   width: 40,
   height: 40,
   iconsService: service("icons"),
-  boardService: service("board"),
   sanitizedIcon: computed("icon", function() {
     return new HtmlSafe(this.iconsService.get(this.icon));
   }),

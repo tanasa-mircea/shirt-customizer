@@ -7,20 +7,21 @@ export default Component.extend({
   style: "",
   attributeBindings: ["height", "width"],
 
-  didRender() {
-    this.canvas = this.get("element");
-    this.context = this.canvas.getContext("2d");
+  didInsertElement() {
+    this.context = this.element.getContext("2d");
+    this.drawCanvas();
+  },
 
-    let hue,
-        saturation = 100,
+  drawCanvas: function() {
+    let saturation = 100,
         row = 0,
-        column,
         hueStep = 360 / this.width,
         saturationStep = 100 / this.height;
 
     while (saturation > 0) {
-      column = 0,
-      hue = 0;
+      let column = 0,
+          hue = 0;
+
 
       while (hue < 360) {
         this.context.fillStyle = `hsl(${hue}, ${saturation}%, 50%)`;

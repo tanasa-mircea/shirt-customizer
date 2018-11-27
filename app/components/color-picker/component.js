@@ -1,6 +1,8 @@
 import Component from "@ember/component";
 import { set } from "@ember/object";
 
+const magnifierOffset = 25;
+
 export default Component.extend({
   classNameBindings: ["class"],
   class: "color-picker",
@@ -15,8 +17,8 @@ export default Component.extend({
   },
 
   mouseMove() {
-    set(this.magnifierPosition, "x", event.x - 25);
-    set(this.magnifierPosition, "y", event.y - 25);
+    set(this.magnifierPosition, "x", event.x - magnifierOffset);
+    set(this.magnifierPosition, "y", event.y - magnifierOffset);
   },
 
   mouseLeave() {

@@ -9,15 +9,15 @@ body {
 
 .main-wrapper {
   display: flex;
-  align-items: flex-start;
   justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 .drawing-board {
   border: 1px solid black;
-  width: 50vw;
-  height: 30vw;
+  margin-right: 10px;
   position: relative;
+  width: 100%;
 }
 
 .options-pane {
