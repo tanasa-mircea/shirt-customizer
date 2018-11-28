@@ -80,8 +80,28 @@ export default Component.extend({
     this.set("visible", false);
   },
 
-  verticalPositionCompute: function() {
-    return false;
+  verticalPositionCompute: function(data) {
+    const boundingRect = data.target.getBoundingClientRect();
+    const positionX = boundingRect.x - (boundingRect.width / 2);
+    let positionY;
+
+    if (data.before) {
+      positionY = boundingRect.y - this.element.clientHeight - data.offset;
+
+      if (positionY < 0) {
+        return false;
+      }
+
+      return [positionX, positionY];
+    }
+
+    positionY = boundingRect.y + boundingRect.height + data.offset;
+
+    if ((positionY + this.element.clientHeight) > window.innerHeight) {
+      return false;
+    }
+
+    return [positionX, positionY];
   },
 
   horizontalPositionCompute: function(data) {
