@@ -1,12 +1,10 @@
 import Controller from "@ember/controller";
 
 export default Controller.extend({
-  init() {
-    this._super();
-    this.icons = [];
-  },
-
   color: "#f00",
+  size: "M",
+  svg: null,
+  imageUrl: null,
   overlayDisplayed: false,
   actions: {
     optionChange(type, value) {

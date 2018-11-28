@@ -1,7 +1,7 @@
 import { gallerycond } from "shirt-customizer/helpers/gallerycond";
 import { module, test } from "qunit";
 
-module("Unit | Helper | eq", function() {
+module("Unit | Helper | gallerycond", function() {
   test("determine if an item should be visible on current gallery page", function(assert) {
     const itemsOnPage = 8;
     const firstItemIndex = 0;
