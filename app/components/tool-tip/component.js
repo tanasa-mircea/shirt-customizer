@@ -17,7 +17,7 @@ export default Component.extend({
   options: null,
   positionsConfig: null,
   position: computed("options.{positions,target}", function() {
-    if (!this.options) {
+    if (!this.options || !this.element) {
       return [0, 0];
     }
 

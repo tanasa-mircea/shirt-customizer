@@ -1,12 +1,12 @@
 import { module, test } from "qunit";
 import { setupTest } from "ember-qunit";
 
-module("Unit | Service | get-icons", function(hooks) {
+module("Unit | Service | icons", function(hooks) {
   setupTest(hooks);
 
   // Replace this with your real tests.
   test("it exists", function(assert) {
-    let service = this.owner.lookup("service:get-icons");
+    let service = this.owner.lookup("service:icons");
     assert.ok(service);
   });
 });

@@ -46,14 +46,6 @@ export default Service.extend({
     this.currentTooltip.hide();
   },
 
-  updatePosition: function(position) {
-    this.set("position", position);
-  },
-
-  updateContent: function(content) {
-    this.set("content", content);
-  },
-
   setCurrentTooltip: function(tooltip) {
     this.set("currentTooltip" , tooltip);
   }
