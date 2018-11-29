@@ -5,27 +5,25 @@ import { module, test } from "qunit";
 import { setupTest } from "ember-qunit";
 import { run } from "@ember/runloop";
 
+var application;
+
 module("Unit | Initializer | pre-data", function(hooks) {
   setupTest(hooks);
 
   hooks.beforeEach(function() {
-    this.TestApplication = Application.extend();
-    this.TestApplication.initializer({
-      name: "initializer under test",
-      initialize
+    run(function() {
+      application = Application.create();
+      application.deferReadiness();
     });
-
-    this.application = this.TestApplication.create({ autoboot: false });
   });
 
-  hooks.afterEach(function() {
-    run(this.application, "destroy");
-  });
+  test("Preloaded Icons validity", async function(assert) {
+    await initialize(application);
 
-  // Replace this with your real tests.
-  test("it works", async function(assert) {
-    await this.application.boot();
+    const isObject = (typeof application.preloadedIcons) === "object";
+    const hasProperties = isObject && Object.keys(application.preloadedIcons).length > 0;
 
-    assert.ok(true);
+    assert.ok(isObject, "The initialized preloadedIcons should be an object");
+    assert.ok(hasProperties, "The initialized preloadedIcons should have at least one property inside");
   });
 });

@@ -5,12 +5,18 @@ var loadIcons = function() {
 };
 
 export function initialize(application) {
-  application.deferReadiness();
-  loadIcons()
-    .then(function(icons) {
-      application.set("preloadedIcons", icons);
-      application.advanceReadiness();
-    });
+  return new Promise(function(resolve, reject) {
+    application.deferReadiness();
+    loadIcons()
+      .then(function(icons) {
+        application.set("preloadedIcons", icons);
+        application.advanceReadiness();
+        resolve();
+      })
+      .catch(function(err) {
+        reject(err);
+      });
+  });
 }
 
 export default {

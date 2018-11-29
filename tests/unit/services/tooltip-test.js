@@ -15,7 +15,6 @@ function createFakeElement() {
 module("Unit | Service | tooltip", function(hooks) {
   setupTest(hooks);
 
-  // test show
   test("Show tooltip without positions", function(assert) {
     const service = this.owner.lookup("service:tooltip");
     const tooltipFactory = this.owner.factoryFor("component:tool-tip");
