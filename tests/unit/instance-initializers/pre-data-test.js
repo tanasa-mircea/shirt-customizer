@@ -4,25 +4,34 @@ import { initialize } from "shirt-customizer/instance-initializers/pre-data";
 import { module, test } from "qunit";
 import { run } from "@ember/runloop";
 
+const expected = {
+
+};
+var application,
+    appInstance;
+
+var iconsService;
+
 module("Unit | Instance Initializer | pre-data", function(hooks) {
   hooks.beforeEach(function() {
-    this.TestApplication = Application.extend();
-    this.TestApplication.instanceInitializer({
-      name: "initializer under test",
-      initialize
+    run(function() {
+      application = Application.create();
+
+      application.deferReadiness();
+      appInstance = application.buildInstance();
+      appInstance.set("application.preloadedIcons", expected);
+      application.advanceReadiness();
+      console.log('inside run' );
     });
-    this.application = this.TestApplication.create({ autoboot: false });
-    this.instance = this.application.buildInstance();
-  });
-  hooks.afterEach(function() {
-    run(this.application, "destroy");
-    run(this.instance, "destroy");
   });
 
   // Replace this with your real tests.
   test("it works", async function(assert) {
-    await this.instance.boot();
+    initialize(appInstance);
+    console.log('inside test');
+    const iconsService = appInstance.lookup("service:icons");
+    const serviceIcons = iconsService.icons;
 
-    assert.ok(true);
+    assert.deepEqual(serviceIcons, expected, "Icons set on application are the same with the ones saved");
   });
 });
