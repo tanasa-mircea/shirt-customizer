@@ -6,16 +6,15 @@ export default Mixin.create({
   },
 
   mouseMoveOverride: function() {
-    throw (new Error("Mouse down override should be overwritten by the extending class"));
+    throw (new Error("Mouse move override should be overwritten by the extending class"));
   },
 
   mouseUpOverride: function() {
-    throw (new Error("Mouse down override should be overwritten by the extending class"));
+    throw (new Error("Mouse up override should be overwritten by the extending class"));
   },
 
   mouseDown(event) {
     this.isMouseDown = true;
-
     this.mouseMoveRef = this.mouseMoveHandler.bind(this);
     this.mouseUpRef = this.mouseUpHandler.bind(this);
 
