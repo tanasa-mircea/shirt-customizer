@@ -29,8 +29,10 @@ export default Component.extend(DragNDropMixin, {
   }),
 
   mouseEnter() {
+    let boundingClientRect = this.element.getBoundingClientRect();
+
     let tooltipOptions = {
-      target: this.element,
+      target: boundingClientRect,
       content: {
         component: "tooltip-icon",
         componentOptions: {
