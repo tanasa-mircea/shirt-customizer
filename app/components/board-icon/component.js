@@ -13,20 +13,19 @@ import DragNDropMixin from "../../mixins/drag-drop";
 export default Component.extend(DragNDropMixin, {
   tagName: "g",
   classNameBindings: ["class", "invisible"],
-  attributeBindings: ["style", "positionStyle:transform"],
-  positionStyle: computed("position.{x,y}", function() {
+  attributeBindings: ["style", "transform", "width", "height"],
+  position: null,
+  transform: computed("position.{x,y}", function() {
     return `translate(${(this.position.x - this.parentOffset.left - this.boardOffset.left)},
                       ${(this.position.y  - this.parentOffset.top - this.boardOffset.top)})`;
   }),
-  dimensionStyle: computed("height", "width", function() {
-    return `height: ${this.height}px; width: ${this.width}px`;
-  }),
-  style: computed("dimensionStyle", "color", function() {
-    return new HtmlSafe(`fill: ${this.color};` + this.dimensionStyle);
+  style: computed("color", function() {
+    return new HtmlSafe(`fill: ${this.color};`);
   }),
   color: "#000",
   class: "board-icon",
   invisible: false,
+  parentScale: null,
   width: 40,
   height: 40,
   iconsService: service("icons"),
