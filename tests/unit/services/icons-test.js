@@ -5,10 +5,9 @@ module("Unit | Service | icons", function(hooks) {
   setupTest(hooks);
 
   const mockIcons = {
-    "alien": "alienIcon.jpg"
+    alien: "alienIcon.jpg"
   };
 
-  // Replace this with your real tests.
   test("Icons array update", function(assert) {
     let service = this.owner.lookup("service:icons");
 
