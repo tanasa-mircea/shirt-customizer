@@ -98,6 +98,30 @@ module("Integration | Component | board-icon", function(hooks) {
     assert.equal(typeof selectedIcon, "object", "Selected icon is set on click");
     assert.equal(Math.round(renderedIconX * 2 - iconBBox.x), expectedX, "The icon should position on horizontal as expected");
     assert.equal(Math.round(renderedIconY * 2 - iconBBox.y), expectedY, "The icon should position on vertical as expected");
+  });
 
+  test("Update icon color", async function(assert) {
+    let currentElementData = this.element.getBoundingClientRect();
+
+    this.set("position", {
+      x: currentElementData.x + 30,
+      y: currentElementData.y + 30
+    });
+
+    this.set("parentOffset", {
+      left: 0,
+      top: 0
+    });
+
+    this.set("boardOffset", {
+      left: currentElementData.x,
+      top: currentElementData.y
+    });
+
+    await render(hbs `<svg id="testSvg">{{board-icon position=position parentOffset=parentOffset boardOffset=boardOffset icon="alien" selected=selected}}</svg>`);
+    await click("#testSvg .board-icon");
+
+
+    assert.equal('', '', "The icon should position on vertical as expected");
   });
 });
