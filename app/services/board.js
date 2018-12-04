@@ -25,10 +25,10 @@ export default Service.extend({
   },
 
   removeIcon: function(icon) {
-    let iconsCopy = [].concat(this.icons[icon.parentIndex]);
+    let iconsCopy = [].concat(this.icons[icon.parentId]);
     iconsCopy.splice(icon.currentIndex, 1);
 
-    set(this.icons, icon.parentIndex, iconsCopy);
+    set(this.icons, icon.parentId, iconsCopy);
     this.updateIconsIndexes();
   },
 

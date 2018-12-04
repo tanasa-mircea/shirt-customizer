@@ -41,7 +41,7 @@ module("Unit | Service | tooltip", function(hooks) {
         offset: 40
       }, {
         position: "left",
-        offset: "20"
+        offset: 20
       }]
     };
 

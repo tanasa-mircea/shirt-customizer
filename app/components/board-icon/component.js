@@ -94,7 +94,7 @@ export default Component.extend(DragNDropMixin, {
     this.set("hasMoved", false);
 
     let shirtParent = event.target.closest(".shirt-svg");
-    if (shirtParent && shirtParent.dataset.index !== this.parentIndex) {
+    if (shirtParent && shirtParent.dataset.index !== this.parentId) {
       this.replaceParent(this, shirtParent.dataset.index);
       this.removeIcon(this);
     }
