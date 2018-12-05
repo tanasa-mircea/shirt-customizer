@@ -25,6 +25,11 @@ module("Unit | Instance Initializer | pre-data", function(hooks) {
     }.bind(this));
   });
 
+  hooks.afterEach(function() {
+    run(this.appInstance, "destroy");
+    run(this.application, "destroy");
+  });
+
   test("it works", async function(assert) {
     initialize(this.appInstance);
     const iconsService = this.appInstance.lookup("service:icons");
