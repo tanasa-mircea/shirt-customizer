@@ -5,7 +5,6 @@ module("Unit | Route | customizer", function(hooks) {
   setupTest(hooks);
 
   test("it exists", function(assert) {
-    console.log('this ', this)
     var route = this.owner.lookup("route:customizer");
     assert.ok(route);
   });
