@@ -13,14 +13,14 @@ import DragNDropMixin from "../../mixins/drag-drop";
 export default Component.extend(DragNDropMixin, {
   tagName: "g",
   classNameBindings: ["class", "invisible"],
-  attributeBindings: ["style", "transform", "width", "height"],
+  attributeBindings: ["transform", "width", "height", "fill"],
   position: null,
   transform: computed("position.{x,y}", function() {
     return `translate(${(this.position.x - this.parentOffset.left - this.boardOffset.left)},
                       ${(this.position.y  - this.parentOffset.top - this.boardOffset.top)})`;
   }),
-  style: computed("color", function() {
-    return new HtmlSafe(`fill: ${this.color};`);
+  fill: computed("color", function() {
+    return `${this.color}`;
   }),
   color: "#000",
   class: "board-icon",

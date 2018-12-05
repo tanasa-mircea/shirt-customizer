@@ -49,58 +49,6 @@ module("Integration | Component | board-icon", function(hooks) {
   });
 
   test("Update positions", async function(assert) {
-    let currentElementData = this.element.getBoundingClientRect(),
-        selectedIcon;
-
-    this.set("position", {
-      x: currentElementData.x + 30,
-      y: currentElementData.y + 30
-    });
-
-    this.set("parentOffset", {
-      left: 0,
-      top: 0
-    });
-
-    this.set("boardOffset", {
-      left: currentElementData.x,
-      top: currentElementData.y
-    });
-
-    this.set("selected", function(icon) {
-      selectedIcon = icon;
-    });
-
-    await render(hbs `<svg id="testSvg">{{board-icon position=position parentOffset=parentOffset boardOffset=boardOffset icon="alien" selected=selected parentScale="1"}}</svg>`);
-    await click("#testSvg .board-icon");
-
-    let diffX = 10,
-        diffY = 10;
-
-    if (selectedIcon) {
-      await selectedIcon.updatePosition({
-        x: this.position.x + diffX,
-        y: this.position.y + diffY,
-        height: 40,
-        width: 40
-      });
-    }
-
-    let boardIcon = this.element.getElementsByClassName("board-icon")[0],
-        boardIconData = boardIcon.getBoundingClientRect(),
-        renderedIconX = boardIconData.x - currentElementData.x,
-        renderedIconY = boardIconData.y - currentElementData.y;
-
-    let iconBBox = boardIcon.getBBox();
-    let expectedX = this.position.x - this.parentOffset.left - this.boardOffset.left - diffX;
-    let expectedY = this.position.y - this.parentOffset.top - this.boardOffset.top - diffY;
-
-    assert.equal(typeof selectedIcon, "object", "Selected icon is set on click");
-    assert.equal(Math.round(renderedIconX * 2 - iconBBox.x), expectedX, "The icon should position on horizontal as expected");
-    assert.equal(Math.round(renderedIconY * 2 - iconBBox.y), expectedY, "The icon should position on vertical as expected");
-  });
-
-  test("Update icon color", async function(assert) {
     let currentElementData = this.element.getBoundingClientRect();
 
     this.set("position", {
@@ -118,10 +66,57 @@ module("Integration | Component | board-icon", function(hooks) {
       top: currentElementData.y
     });
 
-    await render(hbs `<svg id="testSvg">{{board-icon position=position parentOffset=parentOffset boardOffset=boardOffset icon="alien" selected=selected}}</svg>`);
-    await click("#testSvg .board-icon");
+    await render(hbs `<svg id="testSvg">{{board-icon position=position parentOffset=parentOffset boardOffset=boardOffset icon="alien" parentScale="1"}}</svg>`);
 
+    this.set("position", {
+      x: this.position.x + 10,
+      y: this.position.y + 10,
+      height: 40,
+      width: 40
+    });
 
-    assert.equal('', '', "The icon should position on vertical as expected");
+    let boardIcon = this.element.getElementsByClassName("board-icon")[0],
+        boardIconData = boardIcon.getBoundingClientRect(),
+        renderedIconX = boardIconData.x - currentElementData.x,
+        renderedIconY = boardIconData.y - currentElementData.y;
+
+    let iconBBox = boardIcon.getBBox();
+    let expectedX = this.position.x - this.parentOffset.left - this.boardOffset.left;
+    let expectedY = this.position.y - this.parentOffset.top - this.boardOffset.top;
+
+    assert.equal(Math.round(renderedIconX * 2 - iconBBox.x), expectedX, "The icon should position on horizontal as expected");
+    assert.equal(Math.round(renderedIconY * 2 - iconBBox.y), expectedY, "The icon should position on vertical as expected");
+  });
+
+  test("Update icon color", async function(assert) {
+    let currentElementData = this.element.getBoundingClientRect(),
+        boardIcon,
+        iconFill,
+        newColor = "rgb(255, 0, 0)",
+        color = "#0f0";
+
+    this.set("position", {
+      x: currentElementData.x + 30,
+      y: currentElementData.y + 30
+    });
+
+    this.set("parentOffset", {
+      left: 0,
+      top: 0
+    });
+
+    this.set("boardOffset", {
+      left: currentElementData.x,
+      top: currentElementData.y
+    });
+
+    await render(hbs `<svg id="testSvg">{{board-icon position=position parentOffset=parentOffset boardOffset=boardOffset icon="alien" selected=selected color=color}}</svg>`);
+
+    this.set("color", newColor);
+
+    boardIcon = this.element.getElementsByClassName("board-icon")[0];
+    iconFill = boardIcon.getAttribute("fill");
+
+    assert.equal(iconFill, newColor, "The icon should be red");
   });
 });
