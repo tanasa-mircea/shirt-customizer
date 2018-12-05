@@ -25,10 +25,7 @@ module("Unit | Instance Initializer | pre-data", function(hooks) {
     }.bind(this));
   });
 
-  // Replace this with your real tests.
   test("it works", async function(assert) {
-    assert.expect(1);
-
     initialize(this.appInstance);
     const iconsService = this.appInstance.lookup("service:icons");
     const serviceIcons = iconsService.icons;
