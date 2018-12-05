@@ -18,7 +18,6 @@ module("Unit | Instance Initializer | pre-data", function(hooks) {
   hooks.beforeEach(function() {
     run(function() {
       this.application = Application.create();
-
       this.appInstance = this.application.buildInstance();
       this.appInstance.set("application.preloadedIcons", expected);
       this.appInstance.register("service:icons", iconsMock, { instantiate: true });
